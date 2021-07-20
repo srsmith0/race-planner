@@ -3,6 +3,7 @@ import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 
 //TODO: create race form with distance + elevation gain and loss
+//add radio button for miles or km
 //create form for nutrition requirements and expected time
 //create list for aid stations with distance of each station. give option for crew and/or drop bag
 
@@ -16,9 +17,25 @@ export default function Home() {
   const [elevationGain, setElevationGain] = useState('');
   const [elevationLoss, setElevationLoss] = useState('');
   const [timeEstimate, setTimeEstimate] = useState('');
-  const [calories, setCalories] = useState('');
-  const [hydration, setHydration] = useState('');
-  const [sodium, setSodium] = useState('');
+  const [calorieRate, setCalorieRate] = useState('');
+  const [hydrationRate, setHydrationRate] = useState('');
+  const [sodiumRate, setSodiumRate] = useState('');
+
+  function handleSumbit(e) {
+    e.preventDefault();
+    //calculations happen here;
+  }
+  
+  // include when backend is added
+  // function clearForm() {
+  //   setTotalDistance('');
+  //   setElevationGain('');
+  //   setElevationLoss('');
+  //   setTimeEstimate('');
+  //   setCalorieRate('');
+  //   setHydrationRate('');
+  //   setSodiumRate('');
+  // }
 
   return (
     <div className={styles.container}>
@@ -27,7 +44,7 @@ export default function Home() {
         <meta name="application-name" content="Ultra Planner" />
         <meta name="description" content="Ultramarathon race planner" />
         <meta name="keywords" content="Ultramarathon, race planner, ultra,planner, trail running, trail" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -36,25 +53,28 @@ export default function Home() {
         <p>Success Through Preparation</p>
 
         <div className="race-info">
-          <form>
-            <label htmlFor="distance">Race distance: </label>
+          <form onSubmit={handleSumbit}>
+            <label htmlFor="distance">Race distance (miles) : </label>
             <input
+              required
               type="text"
               id="distance"
               name="distance"
               value={totalDistance}
               onChange={(e) => setTotalDistance(e.target.value)}
             />
-            <label htmlFor="elevationGain">Elevation Gain: </label>
+            <label htmlFor="elevationGain">Elevation Gain (ft) : </label>
             <input
+              required
               type="text"
               id="elevationGain"
               name="gain"
               value={elevationGain}
               onChange={(e) => setElevationGain(e.target.value)}
             />
-            <label htmlFor="elevationLoss">Elevation Loss: </label>
+            <label htmlFor="elevationLoss">Elevation Loss (ft) : </label>
             <input
+              required
               type="text"
               id="elevationLoss"
               name="loss"
@@ -63,12 +83,14 @@ export default function Home() {
             />
             <label htmlFor="timeEstimate">Time Goal (hr:min): </label>
             <input
+              required
               type="text"
               id="timeEstimate"
               name="time"
               value={timeEstimate}
               onChange={(e) => setTimeEstimate(e.target.value)}
             />
+            <button type="submit">Go!</button>
           </form>
         </div>
 
