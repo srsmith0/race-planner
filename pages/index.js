@@ -1,8 +1,19 @@
 import Head from 'next/head'
-
+import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 
+//TODO: create race form with distance + elevation gain and loss
+//create form for nutrition requirements and expected time
+//create list for aid stations with distance of each station. give option for crew and/or drop bag
+
+//TODO: Generate total gain and loss ft/mile
+//generate total nutrition needed
+//generate distance between aid stations and calories that are needed between them
+//give average pace to meet time goal
+
 export default function Home() {
+  const [totalDistance, setTotalDistance] = useState('');
+
   return (
     <div className={styles.container}>
       <Head>
