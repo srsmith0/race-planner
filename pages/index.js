@@ -13,6 +13,12 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   const [totalDistance, setTotalDistance] = useState('');
+  const [elevationGain, setElevationGain] = useState('');
+  const [elevationLoss, setElevationLoss] = useState('');
+  const [timeEstimate, setTimeEstimate] = useState('');
+  const [calories, setCalories] = useState('');
+  const [hydration, setHydration] = useState('');
+  const [sodium, setSodium] = useState('');
 
   return (
     <div className={styles.container}>
@@ -27,6 +33,44 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1>Ultra Planner</h1>
+        <p>Success Through Preparation</p>
+
+        <div className="race-info">
+          <form>
+            <label htmlFor="distance">Race distance: </label>
+            <input
+              type="text"
+              id="distance"
+              name="distance"
+              value={totalDistance}
+              onChange={(e) => setTotalDistance(e.target.value)}
+            />
+            <label htmlFor="elevationGain">Elevation Gain: </label>
+            <input
+              type="text"
+              id="elevationGain"
+              name="gain"
+              value={elevationGain}
+              onChange={(e) => setElevationGain(e.target.value)}
+            />
+            <label htmlFor="elevationLoss">Elevation Loss: </label>
+            <input
+              type="text"
+              id="elevationLoss"
+              name="loss"
+              value={elevationLoss}
+              onChange={(e) => setElevationLoss(e.target.value)}
+            />
+            <label htmlFor="timeEstimate">Time Goal (hr:min): </label>
+            <input
+              type="text"
+              id="timeEstimate"
+              name="time"
+              value={timeEstimate}
+              onChange={(e) => setTimeEstimate(e.target.value)}
+            />
+          </form>
+        </div>
 
       </main>
 
