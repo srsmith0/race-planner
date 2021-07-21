@@ -38,7 +38,7 @@ export default function Home() {
   // }
 
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Ultra Planner</title>
         <meta name="application-name" content="Ultra Planner" />
@@ -48,39 +48,46 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <h1>Ultra Planner</h1>
         <p>Success Through Preparation</p>
 
-        <div className="race-info">
+        <div className={styles.raceInfo}>
           <form onSubmit={handleSumbit}>
+            <div className="input">
             <label htmlFor="distance">Race distance (miles) : </label>
             <input
               required
-              type="text"
+              type="number"
               id="distance"
               name="distance"
               value={totalDistance}
               onChange={(e) => setTotalDistance(e.target.value)}
             />
+            </div>
+            <div className="input">
             <label htmlFor="elevationGain">Elevation Gain (ft) : </label>
             <input
               required
-              type="text"
+              type="number"
               id="elevationGain"
               name="gain"
               value={elevationGain}
               onChange={(e) => setElevationGain(e.target.value)}
             />
+            </div>
+            <div className="input">
             <label htmlFor="elevationLoss">Elevation Loss (ft) : </label>
             <input
               required
-              type="text"
+              type="number"
               id="elevationLoss"
               name="loss"
               value={elevationLoss}
               onChange={(e) => setElevationLoss(e.target.value)}
             />
+            </div>
+            <div className="input">
             <label htmlFor="timeEstimate">Time Goal (hr:min): </label>
             <input
               required
@@ -90,6 +97,7 @@ export default function Home() {
               value={timeEstimate}
               onChange={(e) => setTimeEstimate(e.target.value)}
             />
+            </div>
             <button type="submit">Go!</button>
           </form>
         </div>
