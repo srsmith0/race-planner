@@ -2,9 +2,8 @@ import Head from 'next/head'
 import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 
-//TODO: create race form with distance + elevation gain and loss
+//TODO:
 //add radio button for miles or km
-//create form for nutrition requirements and expected time
 //create list for aid stations with distance of each station. give option for crew and/or drop bag
 
 //TODO: Generate total gain and loss ft/mile
@@ -49,11 +48,14 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Ultra Planner</h1>
-        <p>Success Through Preparation</p>
+        <div class="banner">
+          <h1>Ultra Planner</h1>
+          <p>Success Through Preparation</p>
+        </div>
 
-        <div className={styles.raceInfo}>
+        <div className="race-info">
           <form onSubmit={handleSumbit}>
+            <div className="distance">
             <div className="input">
             <label htmlFor="distance">Race distance (miles) : </label>
             <input
@@ -97,6 +99,42 @@ export default function Home() {
               value={timeEstimate}
               onChange={(e) => setTimeEstimate(e.target.value)}
             />
+              </div>
+            </div>
+            <div className="nutrition">
+              <div className="input">
+              <label htmlFor="calories">Calorie Intake Rate (cal/hr) : </label>
+              <input
+              required
+              type="number"
+              id="calories"
+              name="calories"
+              value={calorieRate}
+              onChange={(e) => setCalorieRate(e.target.value)}
+              />
+              </div>
+            <div className="input">
+              <label htmlFor="hydration">Fluid Intake Rate (L/hr) : </label>
+              <input
+              required
+              type="number"
+              id="hydration"
+              name="hydration"
+              value={hydrationRate}
+              onChange={(e) => setHydrationRate(e.target.value)}
+              />
+            </div>
+            <div className="input">
+              <label htmlFor="sodium">Sodium Intake Rate (mg/hr) : </label>
+              <input
+              required
+              type="number"
+              id="sodium"
+              name="sodium"
+              value={sodiumRate}
+              onChange={(e) => setSodiumRate(e.target.value)}
+              />
+            </div>  
             </div>
             <button type="submit">Go!</button>
           </form>

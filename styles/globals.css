@@ -6,11 +6,16 @@ body {
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+.banner {
+	text-align: center;
+	padding-bottom: 3rem;
+}
+
 .race-info {
 	display: flex;
-	flex-flow: column;
+	justify-content: center;
 }
 
 .input {
-	margin: 2rem;
+	padding: 0.5rem;
 }
