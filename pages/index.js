@@ -6,35 +6,39 @@ import styles from '../styles/Home.module.css'
 //add radio button for miles or km
 //create list for aid stations with distance of each station. give option for crew and/or drop bag
 
-//TODO: Generate total gain and loss ft/mile
-//generate total nutrition needed
+//TODO: 
 //generate distance between aid stations and calories that are needed between them
-//give average pace to meet time goal
+//fix pace output so it is in correct format
 
 export default function Home() {
   const [totalDistance, setTotalDistance] = useState('');
   const [elevationGain, setElevationGain] = useState('');
   const [elevationLoss, setElevationLoss] = useState('');
   const [timeEstimate, setTimeEstimate] = useState('');
-  const [calorieRate, setCalorieRate] = useState('');
-  const [hydrationRate, setHydrationRate] = useState('');
-  const [sodiumRate, setSodiumRate] = useState('');
+  const [calorieRate, setCalorieRate] = useState(250);
+  const [hydrationRate, setHydrationRate] = useState(500);
+  const [sodiumRate, setSodiumRate] = useState(700);
+  const [plan, setPlan] = useState({
+    ascent: null,
+    descent: null,
+    pace: null,
+    calories: null,
+    liquid: null,
+    sodium: null
+  })
 
   function handleSumbit(e) {
     e.preventDefault();
-    //calculations happen here;
+    const racePlan = {};
+    const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
+    racePlan.ascent = Math.round((elevationGain / totalDistance));
+    racePlan.descent = Math.round((elevationLoss / totalDistance));
+    racePlan.pace = timeInMinutes / totalDistance;
+    racePlan.calories = Math.round(calorieRate * (timeInMinutes/60));
+    racePlan.liquid = (hydrationRate * (timeInMinutes/60) / 1000).toFixed(1);
+    racePlan.sodium = Math.round(sodiumRate * (timeInMinutes/60));
+    setPlan(racePlan)
   }
-  
-  // include when backend is added
-  // function clearForm() {
-  //   setTotalDistance('');
-  //   setElevationGain('');
-  //   setElevationLoss('');
-  //   setTimeEstimate('');
-  //   setCalorieRate('');
-  //   setHydrationRate('');
-  //   setSodiumRate('');
-  // }
 
   return (
     <div>
@@ -48,7 +52,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <div class="banner">
+        <div className="banner">
           <h1>Ultra Planner</h1>
           <p>Success Through Preparation</p>
         </div>
@@ -90,7 +94,7 @@ export default function Home() {
             />
             </div>
             <div className="input">
-            <label htmlFor="timeEstimate">Time Goal (hr:min): </label>
+            <label htmlFor="timeEstimate">Time Goal (hr:min) : </label>
             <input
               required
               type="text"
@@ -114,7 +118,7 @@ export default function Home() {
               />
               </div>
             <div className="input">
-              <label htmlFor="hydration">Fluid Intake Rate (L/hr) : </label>
+              <label htmlFor="hydration">Fluid Intake Rate (mL/hr) : </label>
               <input
               required
               type="number"
@@ -138,6 +142,14 @@ export default function Home() {
             </div>
             <button type="submit">Go!</button>
           </form>
+          <div className="race-plan">
+            <p>Elevation gain per mile: {plan.ascent} ft</p>
+            <p>Elevation loss per mile: {plan.descent} ft</p>
+            <p>Average Pace: {plan.pace} min/mile</p>
+            <p>Total Calories: {plan.calories} calories</p>
+            <p>Total Liquid: {plan.liquid} L</p>
+            <p>Total Sodium: {plan.sodium} mg</p>
+          </div>
         </div>
 
       </main>
