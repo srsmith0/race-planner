@@ -30,10 +30,15 @@ export default function Home() {
   function handleSumbit(e) {
     e.preventDefault();
     const racePlan = {};
-    const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
     racePlan.ascent = Math.round((elevationGain / totalDistance));
     racePlan.descent = Math.round((elevationLoss / totalDistance));
-    racePlan.pace = timeInMinutes / totalDistance;
+    const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
+    let pace = (timeInMinutes / totalDistance).toFixed(2);
+    const firstDigitPace = pace.toString().split('.')[0];
+    const secondDigitPace = "." + pace.toString().split('.')[1];
+    console.log(secondDigitPace)
+    const modifiedSecondDigitPace = (Math.ceil(secondDigitPace * 60)).toString();
+    racePlan.pace = firstDigitPace + ':' + modifiedSecondDigitPace;
     racePlan.calories = Math.round(calorieRate * (timeInMinutes/60));
     racePlan.liquid = (hydrationRate * (timeInMinutes/60) / 1000).toFixed(1);
     racePlan.sodium = Math.round(sodiumRate * (timeInMinutes/60));
