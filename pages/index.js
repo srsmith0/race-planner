@@ -105,6 +105,8 @@ export default function Home() {
               type="text"
               id="timeEstimate"
               name="time"
+              pattern="[0-9]+:[0-5]+[0-9]+$"
+              maxLength="5"
               value={timeEstimate}
               onChange={(e) => setTimeEstimate(e.target.value)}
             />
