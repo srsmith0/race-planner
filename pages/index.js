@@ -18,6 +18,7 @@ export default function Home() {
   const [calorieRate, setCalorieRate] = useState(250);
   const [hydrationRate, setHydrationRate] = useState(500);
   const [sodiumRate, setSodiumRate] = useState(700);
+  const [aidStations, setAidStations] = useState([{name: "Start", distance: 0}]);
   const [plan, setPlan] = useState({
     ascent: null,
     descent: null,
@@ -41,13 +42,11 @@ export default function Home() {
 
   function handleSumbit(e) {
     e.preventDefault();
+    const racePlan = {};
     let distance = totalDistance
     if (distanceType === "kilometers") {
-      console.log(distanceType)
-      console.log(totalDistance)
       distance = ((totalDistance * .621371).toFixed(2));
     }
-    const racePlan = {};
     racePlan.ascent = Math.round((elevationGain / distance));
     racePlan.descent = Math.round((elevationLoss / distance));
     const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
@@ -58,6 +57,7 @@ export default function Home() {
     racePlan.sodium = Math.round(sodiumRate * (timeInMinutes / 60));
     setPlan(racePlan)
   }
+
 
   return (
     <div>
