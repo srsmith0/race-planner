@@ -3,15 +3,15 @@ import { useState } from 'react'
 import styles from '../styles/Home.module.css'
 
 //TODO:
-//add radio button for miles or km
 //create list for aid stations with distance of each station. give option for crew and/or drop bag
 
 //TODO: 
 //generate distance between aid stations and calories that are needed between them
-//fix pace output so it is in correct format
+
 
 export default function Home() {
   const [totalDistance, setTotalDistance] = useState('');
+  const [distanceType, setDistanceType] = useState('');
   const [elevationGain, setElevationGain] = useState('');
   const [elevationLoss, setElevationLoss] = useState('');
   const [timeEstimate, setTimeEstimate] = useState('');
@@ -27,21 +27,35 @@ export default function Home() {
     sodium: null
   })
 
-  function handleSumbit(e) {
-    e.preventDefault();
-    const racePlan = {};
-    racePlan.ascent = Math.round((elevationGain / totalDistance));
-    racePlan.descent = Math.round((elevationLoss / totalDistance));
-    const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
-    let pace = (timeInMinutes / totalDistance).toFixed(2);
+  function convertPace(pace) {
     const firstDigitPace = pace.toString().split('.')[0];
     const secondDigitPace = "." + pace.toString().split('.')[1];
-    console.log(secondDigitPace)
-    const modifiedSecondDigitPace = (Math.ceil(secondDigitPace * 60)).toString();
-    racePlan.pace = firstDigitPace + ':' + modifiedSecondDigitPace;
+    let modifiedSecondDigitPace = (parseInt(Math.ceil(secondDigitPace * 60)).toString());
+    if (secondDigitPace === ".00") {
+      modifiedSecondDigitPace = "00";
+    } else if (modifiedSecondDigitPace.length === 1) {
+      modifiedSecondDigitPace = "0" + (parseInt(Math.floor(secondDigitPace * 60)).toString());
+    }
+    return firstDigitPace + ':' + modifiedSecondDigitPace;
+  }
+
+  function handleSumbit(e) {
+    e.preventDefault();
+    let distance = totalDistance
+    if (distanceType === "kilometers") {
+      console.log(distanceType)
+      console.log(totalDistance)
+      distance = ((totalDistance * .621371).toFixed(2));
+    }
+    const racePlan = {};
+    racePlan.ascent = Math.round((elevationGain / distance));
+    racePlan.descent = Math.round((elevationLoss / distance));
+    const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
+    let pace = (timeInMinutes / distance).toFixed(2);
+    racePlan.pace = convertPace(pace)
     racePlan.calories = Math.round(calorieRate * (timeInMinutes/60));
     racePlan.liquid = (hydrationRate * (timeInMinutes/60) / 1000).toFixed(1);
-    racePlan.sodium = Math.round(sodiumRate * (timeInMinutes/60));
+    racePlan.sodium = Math.round(sodiumRate * (timeInMinutes / 60));
     setPlan(racePlan)
   }
 
@@ -65,51 +79,69 @@ export default function Home() {
         <div className="race-info">
           <form onSubmit={handleSumbit}>
             <div className="distance">
-            <div className="input">
-            <label htmlFor="distance">Race distance (miles) : </label>
-            <input
-              required
-              type="number"
-              id="distance"
-              name="distance"
-              value={totalDistance}
-              onChange={(e) => setTotalDistance(e.target.value)}
-            />
-            </div>
-            <div className="input">
-            <label htmlFor="elevationGain">Elevation Gain (ft) : </label>
-            <input
-              required
-              type="number"
-              id="elevationGain"
-              name="gain"
-              value={elevationGain}
-              onChange={(e) => setElevationGain(e.target.value)}
-            />
-            </div>
-            <div className="input">
-            <label htmlFor="elevationLoss">Elevation Loss (ft) : </label>
-            <input
-              required
-              type="number"
-              id="elevationLoss"
-              name="loss"
-              value={elevationLoss}
-              onChange={(e) => setElevationLoss(e.target.value)}
-            />
-            </div>
-            <div className="input">
-            <label htmlFor="timeEstimate">Time Goal (hr:min) : </label>
-            <input
-              required
-              type="text"
-              id="timeEstimate"
-              name="time"
-              pattern="[0-9]+:[0-5]+[0-9]+$"
-              maxLength="5"
-              value={timeEstimate}
-              onChange={(e) => setTimeEstimate(e.target.value)}
-            />
+              <div className="input">
+                <label htmlFor="distance">Race distance : </label>
+                <input
+                  required
+                  type="number"
+                  id="distance"
+                  name="distance"
+                  value={totalDistance}
+                  onChange={(e) => setTotalDistance(e.target.value)}
+                />
+                <input
+                  required
+                  type="radio"
+                  id="miles"
+                  name="distance"
+                  value={distanceType}
+                  onChange={() => setDistanceType('miles')}
+                />
+                <label htmlFor="miles"> Miles</label>
+                <input
+                  type="radio"
+                  id="kilometers"
+                  name="distance"
+                  value={distanceType}
+                  onChange={() => setDistanceType('kilometers')}
+                />
+                <label htmlFor="kilometers">Kilometers</label>
+              </div>
+              <div className="input">
+                <label htmlFor="elevationGain">Elevation Gain (ft) : </label>
+                <input
+                  required
+                  type="number"
+                  id="elevationGain"
+                  name="gain"
+                  value={elevationGain}
+                  onChange={(e) => setElevationGain(e.target.value)}
+                />
+              </div>
+              <div className="input">
+                <label htmlFor="elevationLoss">Elevation Loss (ft) : </label>
+                <input
+                  required
+                  type="number"
+                  id="elevationLoss"
+                  name="loss"
+                  value={elevationLoss}
+                  onChange={(e) => setElevationLoss(e.target.value)}
+                />
+              </div>
+              <div className="input">
+                <label htmlFor="timeEstimate">Time Goal (hr:min) : </label>
+                <input
+                  required
+                  type="text"
+                  id="timeEstimate"
+                  name="time"
+                  pattern="[0-9]+:[0-5]+[0-9]+$"
+                  maxLength="5"
+                  placeholder="00:00"
+                  value={timeEstimate}
+                  onChange={(e) => setTimeEstimate(e.target.value)}
+                />
               </div>
             </div>
             <div className="nutrition">
