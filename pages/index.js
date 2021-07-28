@@ -40,7 +40,7 @@ export default function Home() {
     return firstDigitPace + ':' + modifiedSecondDigitPace;
   }
 
-  function handleSumbit(e) {
+  function handleRaceInfoSubmit(e) {
     e.preventDefault();
     const racePlan = {};
     let distance = totalDistance
@@ -58,6 +58,12 @@ export default function Home() {
     setPlan(racePlan)
   }
 
+  function handleAidStationSubmit(e) {
+    e.preventDefault();
+
+  }
+  // var nameValue = document.getElementById({"id"}).value; for getting form data
+  //window.sessionStorage => saves things in browser, for session
 
   return (
     <div>
@@ -77,7 +83,7 @@ export default function Home() {
         </div>
 
         <div className="race-info">
-          <form onSubmit={handleSumbit}>
+          <form onSubmit={handleRaceInfoSubmit}>
             <div className="distance">
               <div className="input">
                 <label htmlFor="distance">Race distance : </label>
@@ -180,7 +186,9 @@ export default function Home() {
             </div>  
             </div>
             <button type="submit">Go!</button>
+
           </form>
+          
           <div className="race-plan">
             <p>Elevation gain per mile: {plan.ascent} ft</p>
             <p>Elevation loss per mile: {plan.descent} ft</p>
@@ -190,9 +198,60 @@ export default function Home() {
             <p>Total Sodium: {plan.sodium} mg</p>
           </div>
         </div>
+      
+        <form className="aid-station-form" onSubmit={handleAidStationSubmit}>
+          <label htmlFor="location">Station Name: </label>
+          <input
+            required
+            id="location"
+            type="string"
+            name="location"
+          />
+          <label htmlFor="aid-distance">Distance: </label>
+          <input
+            required
+            id="aid-distance"
+            type="number"
+            name="aid-distance"
+          />
+          <label htmlFor="cutoff">Cuttoff Time: </label>
+          <input
+            id="cutoff"
+            type="string"
+            name="cutoff"
+            pattern="[0-9]+:[0-5]+[0-9]+$"
+          />
+          <select id="am-pm" name="cutoff">
+            <option value="am">AM</option>
+            <option value="pm">PM</option>
+          </select>
+          <p>Check all that apply:  </p>
+          <input
+            id="crew"
+            type="checkbox"
+            name="aid-details"
+            value="crew"
+          />
+          <label htmlFor="crew">Crew </label>
+          <input
+            id="drop-bag"
+            type="checkbox"
+            name="aid-details"
+            value="drop-bag"
+          />
+          <label htmlFor="drop-bag">Drop Bag </label>
+          <input
+            id="water-only"
+            type="checkbox"
+            name="aid-details"
+            value="water-only"
+          />
+          <label htmlFor="water-only">Water Only </label>
+          
+          <button type="submit">Add</button>
+        </form>
 
       </main>
-
 
     </div>
   )
