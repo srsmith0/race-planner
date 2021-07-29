@@ -1,13 +1,8 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import styles from '../styles/Home.module.css'
-
-//TODO:
-//create list for aid stations with distance of each station. give option for crew and/or drop bag
 
 //TODO: 
 //generate distance between aid stations and calories that are needed between them
-
 
 export default function Home() {
   const [totalDistance, setTotalDistance] = useState('');
@@ -82,7 +77,8 @@ export default function Home() {
           <p>Success Through Preparation</p>
         </div>
 
-        <div className="race-info">
+      <div className="race-forms">
+        <div className="race-info user-inputs">
           <form onSubmit={handleRaceInfoSubmit}>
             <div className="distance">
               <div className="input">
@@ -188,17 +184,10 @@ export default function Home() {
             <button type="submit">Go!</button>
 
           </form>
-          
-          <div className="race-plan">
-            <p>Elevation gain per mile: {plan.ascent} ft</p>
-            <p>Elevation loss per mile: {plan.descent} ft</p>
-            <p>Average Pace: {plan.pace} min/mile</p>
-            <p>Total Calories: {plan.calories} calories</p>
-            <p>Total Liquid: {plan.liquid} L</p>
-            <p>Total Sodium: {plan.sodium} mg</p>
-          </div>
         </div>
       
+      
+        <div className="user-inputs">
         <form className="aid-station-form" onSubmit={handleAidStationSubmit}>
           <label htmlFor="location">Station Name: </label>
           <input
@@ -250,6 +239,16 @@ export default function Home() {
           
           <button type="submit">Add</button>
         </form>
+        </div>
+      </div>
+          <div className="race-plan">
+            <p>Elevation gain per mile: {plan.ascent} ft</p>
+            <p>Elevation loss per mile: {plan.descent} ft</p>
+            <p>Average Pace: {plan.pace} min/mile</p>
+            <p>Total Calories: {plan.calories} calories</p>
+            <p>Total Liquid: {plan.liquid} L</p>
+            <p>Total Sodium: {plan.sodium} mg</p>
+          </div>
 
       </main>
 
