@@ -56,16 +56,17 @@ export default function Home() {
   function handleAidStationSubmit(e) {
     e.preventDefault();
     let aidStation = {}
+    //rename newaidstation
     aidStation.name = document.getElementById('location').value;
     aidStation.distance = document.getElementById('aid-distance').value;
     aidStation.cutoff = document.getElementById('cutoff').value + document.getElementById('am-pm').value;
     aidStation.crew = document.getElementById('crew').value;
     aidStation.dropBag = document.getElementById('drop-bag').value;
     aidStation.water = document.getElementById('water-only').value;
-    aidStation => setAidStations(state => [...state, aidStation]);
-    localStorage.aidStations = JSON.stringify(aidStations);
-    console.log(localStorage.aidStations)
-    //Broken...need to fix
+    const updatedAidStations = [...aidStations, aidStation];
+    setAidStations(updatedAidStations)
+    console.log(updatedAidStations)
+    //Broken...need to fix checkbox values to true/false when checked
   }
 
   return (
