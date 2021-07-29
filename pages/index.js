@@ -13,7 +13,7 @@ export default function Home() {
   const [calorieRate, setCalorieRate] = useState(250);
   const [hydrationRate, setHydrationRate] = useState(500);
   const [sodiumRate, setSodiumRate] = useState(700);
-  const [aidStations, setAidStations] = useState([{name: "Start", distance: 0}]);
+  const [aidStations, setAidStations] = useState([{location: "Start", distance: 0}]);
   const [plan, setPlan] = useState({
     ascent: null,
     descent: null,
@@ -57,7 +57,7 @@ export default function Home() {
     e.preventDefault();
     let aidStation = {}
     //rename newaidstation
-    aidStation.name = document.getElementById('location').value;
+    aidStation.location = document.getElementById('location').value;
     aidStation.distance = document.getElementById('aid-distance').value;
     aidStation.cutoff = document.getElementById('cutoff').value + document.getElementById('am-pm').value;
     aidStation.crew = document.getElementById('crew').value;
