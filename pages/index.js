@@ -55,10 +55,18 @@ export default function Home() {
 
   function handleAidStationSubmit(e) {
     e.preventDefault();
-
+    let aidStation = {}
+    aidStation.name = document.getElementById('location').value;
+    aidStation.distance = document.getElementById('aid-distance').value;
+    aidStation.cutoff = document.getElementById('cutoff').value + document.getElementById('am-pm').value;
+    aidStation.crew = document.getElementById('crew').value;
+    aidStation.dropBag = document.getElementById('drop-bag').value;
+    aidStation.water = document.getElementById('water-only').value;
+    aidStation => setAidStations(state => [...state, aidStation]);
+    localStorage.aidStations = JSON.stringify(aidStations);
+    console.log(localStorage.aidStations)
+    //Broken...need to fix
   }
-  // var nameValue = document.getElementById({"id"}).value; for getting form data
-  //window.sessionStorage => saves things in browser, for session
 
   return (
     <div>
