@@ -33,7 +33,7 @@ input {
 
 .aid-station-form {
 	display: grid;
-	grid-template-columns: auto;
+	grid-template-columns: 1fr 1fr;
 	border: 1px solid black;
 	padding: 1rem;
 	text-align: center;
@@ -41,4 +41,5 @@ input {
 
 .race-plan {
 	text-align: center;
+	margin: 3rem;
 }

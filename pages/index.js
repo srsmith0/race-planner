@@ -192,8 +192,17 @@ export default function Home() {
 
           </form>
         </div>
+          <div className="race-plan">
+            <p>Elevation gain per mile: {plan.ascent} ft</p>
+            <p>Elevation loss per mile: {plan.descent} ft</p>
+            <p>Average Pace: {plan.pace} min/mile</p>
+            <p>Total Calories: {plan.calories} calories</p>
+            <p>Total Liquid: {plan.liquid} L</p>
+            <p>Total Sodium: {plan.sodium} mg</p>
+          </div>
       
       
+      </div>
         <div className="user-inputs">
         <form className="aid-station-form" onSubmit={handleAidStationSubmit}>
           <label htmlFor="location">Station Name: </label>
@@ -210,18 +219,20 @@ export default function Home() {
             type="number"
             step="0.01"
             name="aid-distance"
-          />
-          <label htmlFor="cutoff">Cuttoff Time: </label>
-          <input
-            id="cutoff"
-            type="string"
-            name="cutoff"
-            pattern="[0-9]+:[0-5]+[0-9]+$"
-          />
-          <select id="am-pm" name="cutoff">
-            <option value="am">AM</option>
-            <option value="pm">PM</option>
-          </select>
+            />
+          <div className="cuttoff">
+            <label htmlFor="cutoff">Cuttoff Time: </label>
+            <input
+             id="cutoff"
+              type="string"
+              name="cutoff"
+              pattern="[0-9]+:[0-5]+[0-9]+$"
+             />
+            <select id="am-pm" name="cutoff">
+              <option value="am">AM</option>
+              <option value="pm">PM</option>
+            </select>
+          </div>
           <p>Check all that apply:  </p>
           <input
             id="crew"
@@ -255,15 +266,6 @@ export default function Home() {
           <button type="submit">Add</button>
         </form>
         </div>
-      </div>
-          <div className="race-plan">
-            <p>Elevation gain per mile: {plan.ascent} ft</p>
-            <p>Elevation loss per mile: {plan.descent} ft</p>
-            <p>Average Pace: {plan.pace} min/mile</p>
-            <p>Total Calories: {plan.calories} calories</p>
-            <p>Total Liquid: {plan.liquid} L</p>
-            <p>Total Sodium: {plan.sodium} mg</p>
-          </div>
 
       </main>
 
