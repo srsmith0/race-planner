@@ -55,18 +55,16 @@ export default function Home() {
 
   function handleAidStationSubmit(e) {
     e.preventDefault();
-    let aidStation = {}
-    //rename newaidstation
-    aidStation.location = document.getElementById('location').value;
-    aidStation.distance = document.getElementById('aid-distance').value;
-    aidStation.cutoff = document.getElementById('cutoff').value + document.getElementById('am-pm').value;
-    aidStation.crew = document.getElementById('crew').value;
-    aidStation.dropBag = document.getElementById('drop-bag').value;
-    aidStation.water = document.getElementById('water-only').value;
-    const updatedAidStations = [...aidStations, aidStation];
+    let newAidStation = {}
+    newAidStation.location = document.getElementById('location').value;
+    newAidStation.distance = document.getElementById('aid-distance').value;
+    newAidStation.cutoff = document.getElementById('cutoff').value + document.getElementById('am-pm').value;
+    newAidStation.crew = document.getElementById('crew').checked;
+    newAidStation.pacer = document.getElementById('pacer').checked;
+    newAidStation.dropBag = document.getElementById('drop-bag').checked;
+    newAidStation.waterOnly = document.getElementById('water-only').checked;
+    const updatedAidStations = [...aidStations, newAidStation];
     setAidStations(updatedAidStations)
-    console.log(updatedAidStations)
-    //Broken...need to fix checkbox values to true/false when checked
   }
 
   return (
@@ -210,6 +208,7 @@ export default function Home() {
             required
             id="aid-distance"
             type="number"
+            step="0.01"
             name="aid-distance"
           />
           <label htmlFor="cutoff">Cuttoff Time: </label>
@@ -227,22 +226,29 @@ export default function Home() {
           <input
             id="crew"
             type="checkbox"
-            name="aid-details"
-            value="crew"
+            name="crew"
+            value="true"
           />
-          <label htmlFor="crew">Crew </label>
+          <label htmlFor="pacer">Crew </label>
+          <input
+            id="pacer"
+            type="checkbox"
+            name="pacer"
+            value="true"
+          />
+          <label htmlFor="crew">Pacer </label>
           <input
             id="drop-bag"
             type="checkbox"
-            name="aid-details"
-            value="drop-bag"
+            name="dropBag"
+            value="true"
           />
           <label htmlFor="drop-bag">Drop Bag </label>
           <input
             id="water-only"
             type="checkbox"
-            name="aid-details"
-            value="water-only"
+            name="waterOnly"
+            value="true"
           />
           <label htmlFor="water-only">Water Only </label>
           
