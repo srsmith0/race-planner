@@ -13,7 +13,7 @@ export default function Home() {
   const [calorieRate, setCalorieRate] = useState(250);
   const [hydrationRate, setHydrationRate] = useState(500);
   const [sodiumRate, setSodiumRate] = useState(700);
-  const [aidStations, setAidStations] = useState([{location: "Start", distance: 0}]);
+  const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0 }]);
   const [plan, setPlan] = useState({
     ascent: null,
     descent: null,
@@ -52,7 +52,7 @@ export default function Home() {
     racePlan.sodium = Math.round(sodiumRate * (timeInMinutes / 60));
     setPlan(racePlan)
   }
-
+  //lookup grid to make aid form look better
   function handleAidStationSubmit(e) {
     e.preventDefault();
     let newAidStation = {}
@@ -232,7 +232,7 @@ export default function Home() {
               <option value="am">AM</option>
               <option value="pm">PM</option>
             </select>
-          </div>
+            </div>
           <p>Check all that apply:  </p>
           <input
             id="crew"
@@ -266,6 +266,18 @@ export default function Home() {
           <button type="submit">Add</button>
         </form>
         </div>
+      <table>
+        <tr>
+          <th>Location</th>
+          <th>Distance</th>
+          <th>Segment Distance</th>
+          <th>Cuttoff Time</th>
+          <th>Crew Access</th>
+          <th>Pacer</th>
+          <th>Drop Bag</th>
+          <th>Water Only</th>
+        </tr>
+      </table>
 
       </main>
 
