@@ -20,18 +20,6 @@ export default function Home() {
     sodium: null
   })
 
-  function convertPace(pace) {
-    const firstDigitPace = pace.toString().split('.')[0];
-    const secondDigitPace = "." + pace.toString().split('.')[1];
-    let modifiedSecondDigitPace = (parseInt(Math.ceil(secondDigitPace * 60)).toString());
-    if (secondDigitPace === ".00") {
-      modifiedSecondDigitPace = "00";
-    } else if (modifiedSecondDigitPace.length === 1) {
-      modifiedSecondDigitPace = "0" + (parseInt(Math.floor(secondDigitPace * 60)).toString());
-    }
-    return firstDigitPace + ':' + modifiedSecondDigitPace;
-  }
-
   function handleRaceInfoSubmit(e) {
     e.preventDefault();
     const racePlan = {};
@@ -48,6 +36,18 @@ export default function Home() {
     racePlan.liquid = (hydrationRate * (timeInMinutes/60) / 1000).toFixed(1);
     racePlan.sodium = Math.round(sodiumRate * (timeInMinutes / 60));
     setPlan(racePlan)
+  }
+
+  function convertPace(pace) {
+    const firstDigitPace = pace.toString().split('.')[0];
+    const secondDigitPace = "." + pace.toString().split('.')[1];
+    let modifiedSecondDigitPace = (parseInt(Math.ceil(secondDigitPace * 60)).toString());
+    if (secondDigitPace === ".00") {
+      modifiedSecondDigitPace = "00";
+    } else if (modifiedSecondDigitPace.length === 1) {
+      modifiedSecondDigitPace = "0" + (parseInt(Math.floor(secondDigitPace * 60)).toString());
+    }
+    return firstDigitPace + ':' + modifiedSecondDigitPace;
   }
 
   function handleAidStationSubmit(e) {
@@ -238,7 +238,9 @@ export default function Home() {
              id="cutoff"
               type="string"
               name="cutoff"
-              pattern="[0-9]+:[0-5]+[0-9]+$"
+              pattern="[0-1]+:[0-5]+[0-9]+$"
+              maxLength="5"
+              placeholder="00:00"
              />
             <select id="am-pm" name="cutoff">
               <option value="am">AM</option>
@@ -293,19 +295,6 @@ export default function Home() {
          </thead>
           <tbody>
           {aidStations.map((aid, index) => createAidTableRow(aid, index))}
-          {/* //   return (
-          //     <tr key={aidStation.distance}>
-          //       <td>{aidStation.location}</td>
-          //       <td>{aidStation.distance}</td>
-          //       <td>add segment distance</td>
-          //       <td>{aidStation.cutoff}</td>
-          //       <td>{aidStation.crew}</td>
-          //       <td>{aidStation.pacer}</td>
-          //       <td>{aidStation.dropBag}</td>
-          //       <td>{aidStation.water}</td>
-          //     </tr>
-          //   );
-          // }))} */}
           </tbody>
       </table>
 
