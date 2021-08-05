@@ -266,17 +266,35 @@ export default function Home() {
           <button type="submit">Add</button>
         </form>
         </div>
-      <table>
-        <tr>
-          <th>Location</th>
-          <th>Distance</th>
-          <th>Segment Distance</th>
-          <th>Cuttoff Time</th>
-          <th>Crew Access</th>
-          <th>Pacer</th>
-          <th>Drop Bag</th>
-          <th>Water Only</th>
-        </tr>
+        <table>
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Distance</th>
+              <th>Segment Distance</th>
+              <th>Cuttoff Time</th>
+              <th>Crew Access</th>
+              <th>Pacer</th>
+              <th>Drop Bag</th>
+              <th>Water Only</th>
+            </tr>
+         </thead>
+          <tbody>
+          {aidStations.map((aidStation => {
+            return (
+              <tr key={aidStation.distance}>
+                <td>{aidStation.location}</td>
+                <td>{aidStation.distance}</td>
+                <td>add segment distance</td>
+                <td>{aidStation.cutoff}</td>
+                <td>{aidStation.crew}</td>
+                <td>{aidStation.pacer}</td>
+                <td>{aidStation.dropBag}</td>
+                <td>{aidStation.water}</td>
+              </tr>
+            );
+          }))}
+          </tbody>
       </table>
 
       </main>
