@@ -1,9 +1,6 @@
 import Head from 'next/head'
 import { useState } from 'react'
 
-//TODO: 
-//generate distance between aid stations and calories that are needed between them
-
 export default function Home() {
   const [totalDistance, setTotalDistance] = useState('');
   const [distanceType, setDistanceType] = useState('');
@@ -52,7 +49,7 @@ export default function Home() {
     racePlan.sodium = Math.round(sodiumRate * (timeInMinutes / 60));
     setPlan(racePlan)
   }
-  //lookup grid to make aid form look better
+
   function handleAidStationSubmit(e) {
     e.preventDefault();
     let newAidStation = {}
@@ -65,6 +62,21 @@ export default function Home() {
     newAidStation.waterOnly = document.getElementById('water-only').checked ? " X " : " - ";
     const updatedAidStations = [...aidStations, newAidStation];
     setAidStations(updatedAidStations)
+  }
+
+  function createAidTableRow(aid, index) {
+    return (
+      <tr key={index}>
+        <td>{aid.location}</td>
+        <td>{aid.distance}</td>
+        <td>{aid.location === "Start" ? " " : aid.distance - aidStations[index - 1].distance}</td>
+        <td>{aid.cutoff}</td>
+        <td>{aid.crew}</td>
+        <td>{aid.pacer}</td>
+        <td>{aid.dropBag}</td>
+        <td>{aid.water}</td>
+      </tr>
+    )
   }
 
   return (
@@ -280,20 +292,20 @@ export default function Home() {
             </tr>
          </thead>
           <tbody>
-          {aidStations.map((aidStation => {
-            return (
-              <tr key={aidStation.distance}>
-                <td>{aidStation.location}</td>
-                <td>{aidStation.distance}</td>
-                <td>add segment distance</td>
-                <td>{aidStation.cutoff}</td>
-                <td>{aidStation.crew}</td>
-                <td>{aidStation.pacer}</td>
-                <td>{aidStation.dropBag}</td>
-                <td>{aidStation.water}</td>
-              </tr>
-            );
-          }))}
+          {aidStations.map((aid, index) => createAidTableRow(aid, index))}
+          {/* //   return (
+          //     <tr key={aidStation.distance}>
+          //       <td>{aidStation.location}</td>
+          //       <td>{aidStation.distance}</td>
+          //       <td>add segment distance</td>
+          //       <td>{aidStation.cutoff}</td>
+          //       <td>{aidStation.crew}</td>
+          //       <td>{aidStation.pacer}</td>
+          //       <td>{aidStation.dropBag}</td>
+          //       <td>{aidStation.water}</td>
+          //     </tr>
+          //   );
+          // }))} */}
           </tbody>
       </table>
 
