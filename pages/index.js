@@ -59,10 +59,10 @@ export default function Home() {
     newAidStation.location = document.getElementById('location').value;
     newAidStation.distance = document.getElementById('aid-distance').value;
     newAidStation.cutoff = document.getElementById('cutoff').value + document.getElementById('am-pm').value;
-    newAidStation.crew = document.getElementById('crew').checked;
-    newAidStation.pacer = document.getElementById('pacer').checked;
-    newAidStation.dropBag = document.getElementById('drop-bag').checked;
-    newAidStation.waterOnly = document.getElementById('water-only').checked;
+    newAidStation.crew = document.getElementById('crew').checked ? " X " : " - ";
+    newAidStation.pacer = document.getElementById('pacer').checked ? " X " : " - ";
+    newAidStation.dropBag = document.getElementById('drop-bag').checked ? " X " : " - ";
+    newAidStation.waterOnly = document.getElementById('water-only').checked ? " X " : " - ";
     const updatedAidStations = [...aidStations, newAidStation];
     setAidStations(updatedAidStations)
   }
