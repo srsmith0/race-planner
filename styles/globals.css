@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat&display=swap");
+/* font-family: 'Fredoka One', cursive;
+font-family: 'Montserrat', sans-serif; */
+
 html,
 body {
 	padding: 0;
@@ -6,7 +10,10 @@ body {
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+/* colors - #75c8ae, #5a3d2b, #ffecb4, #e5771e, #f4a127  */
+
 .banner {
+	font-family: "Fredoka One", sans-serif;
 	text-align: center;
 	padding-bottom: 3rem;
 }
@@ -16,6 +23,7 @@ input {
 }
 
 .user-inputs {
+	font-family: "Montserrat", sans-serif;
 	display: flex;
 	justify-content: center;
 }
@@ -27,6 +35,7 @@ input {
 }
 
 .race-info {
+	font-family: "Montserrat", sans-serif;
 	border: 1px solid black;
 	width: 50%;
 }
@@ -40,6 +49,7 @@ input {
 }
 
 .race-plan {
+	font-family: "Montserrat", sans-serif;
 	text-align: center;
 	margin: 3rem;
 }
