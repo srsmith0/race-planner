@@ -67,15 +67,33 @@ export default function Home() {
 
   function createAidTableRow(aid, index) {
     const calcArrival = () => {
-      
+      if (aid.location === "Start") {
+        return startTime;
+      } else {
+
+      }
     }
+//  CONVERT 24 HOUR TIME TO 12 HOUR TIME
+//     var dt = new Date();
+// var hours = dt.getHours() ; // gives the value in 24 hours format
+// var AmOrPm = hours >= 12 ? 'pm' : 'am';
+// hours = (hours % 12) || 12;
+// var minutes = dt.getMinutes() ;
+// var finalTime = "Time  - " + hours + ":" + minutes + " " + AmOrPm; 
+//     finalTime // final time Time - 22:10
+    
     return (
       <tr key={index}>
         <td>{aid.location}</td>
         <td>{aid.distance}</td>
         <td>{aid.location === "Start" ? " " : aid.distance - aidStations[index - 1].distance}</td>
         {/* expected arrival */}
+        <td>Segment Time</td>
+        <td>Arrival Time</td>
         <td>{aid.cutoff}</td>
+        <td>Calories</td>
+        <td>Liquid</td>
+        <td>Sodium</td>
         {/* calories between
         liquid between
         sodium between
@@ -291,7 +309,12 @@ export default function Home() {
               <th>Location</th>
               <th>Distance</th>
               <th>Segment Distance</th>
+              <th>Segment Time</th>
+              <th>Expected Arrival</th>
               <th>Cuttoff Time</th>
+              <th>Calories/Segment</th>
+              <th>Liquid/Segment</th>
+              <th>Sodium/Segment</th>
               <th>Crew Access</th>
               <th>Pacer</th>
               <th>Drop Bag</th>
