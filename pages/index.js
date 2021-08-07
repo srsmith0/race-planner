@@ -56,6 +56,7 @@ export default function Home() {
     newAidStation.location = document.getElementById('location').value;
     newAidStation.distance = document.getElementById('aid-distance').value;
     newAidStation.cutoff = document.getElementById('cutoff').value + document.getElementById('am-pm').value;
+    newAidStation.cutoff = newAidStation.cutoff.length === 2 ? "" : newAidStation.cutoff;
     newAidStation.crew = document.getElementById('crew').checked ? " X " : " - ";
     newAidStation.pacer = document.getElementById('pacer').checked ? " X " : " - ";
     newAidStation.dropBag = document.getElementById('drop-bag').checked ? " X " : " - ";
@@ -65,12 +66,20 @@ export default function Home() {
   }
 
   function createAidTableRow(aid, index) {
+    const calcArrival = () => {
+      
+    }
     return (
       <tr key={index}>
         <td>{aid.location}</td>
         <td>{aid.distance}</td>
         <td>{aid.location === "Start" ? " " : aid.distance - aidStations[index - 1].distance}</td>
+        {/* expected arrival */}
         <td>{aid.cutoff}</td>
+        {/* calories between
+        liquid between
+        sodium between
+        use pace and distance to determine time, then multiply rates by this time */}
         <td>{aid.crew}</td>
         <td>{aid.pacer}</td>
         <td>{aid.dropBag}</td>
