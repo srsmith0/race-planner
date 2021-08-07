@@ -8,8 +8,8 @@ export default function Home() {
   const [elevationLoss, setElevationLoss] = useState('');
   const [timeEstimate, setTimeEstimate] = useState('');
   const [calorieRate, setCalorieRate] = useState(250);
-  const [hydrationRate, setHydrationRate] = useState(500);
-  const [sodiumRate, setSodiumRate] = useState(700);
+  const [hydrationRate, setHydrationRate] = useState(750);
+  const [sodiumRate, setSodiumRate] = useState(500);
   const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0 }]);
   const [plan, setPlan] = useState({
     ascent: null,
@@ -96,9 +96,7 @@ export default function Home() {
           <p>Success Through Preparation</p>
         </div>
 
-      <div className="race-forms">
-        <div className="race-info user-inputs">
-          <form onSubmit={handleRaceInfoSubmit}>
+          <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
             <div className="distance">
               <div className="input">
                 <label htmlFor="distance">Race distance : </label>
@@ -112,6 +110,7 @@ export default function Home() {
                 />
                 <input
                   required
+                  className="distance"
                   type="radio"
                   id="miles"
                   name="distance"
@@ -120,6 +119,7 @@ export default function Home() {
                 />
                 <label htmlFor="miles"> Miles</label>
                 <input
+                  className="distance"
                   type="radio"
                   id="kilometers"
                   name="distance"
@@ -200,11 +200,11 @@ export default function Home() {
               />
             </div>  
             </div>
-            <button type="submit">Go!</button>
+            <button type="submit">Calculate</button>
 
-          </form>
-        </div>
-          <div className="race-plan">
+        </form>
+        
+          <div className="race-plan default-text">
             <p>Elevation gain per mile: {plan.ascent} ft</p>
             <p>Elevation loss per mile: {plan.descent} ft</p>
             <p>Average Pace: {plan.pace} min/mile</p>
@@ -213,10 +213,7 @@ export default function Home() {
             <p>Total Sodium: {plan.sodium} mg</p>
           </div>
       
-      
-      </div>
-        <div className="user-inputs">
-        <form className="aid-station-form" onSubmit={handleAidStationSubmit}>
+        <form className="aid-station-form default-text" onSubmit={handleAidStationSubmit}>
           <label htmlFor="location">Station Name: </label>
           <input
             required
@@ -233,12 +230,11 @@ export default function Home() {
             name="aid-distance"
             />
           <div className="cuttoff">
-            <label htmlFor="cutoff">Cuttoff Time: </label>
+            <label htmlFor="cutoff">Cuttoff Time (optional): </label>
             <input
              id="cutoff"
               type="string"
               name="cutoff"
-              pattern="[0-1]+:[0-5]+[0-9]+$"
               maxLength="5"
               placeholder="00:00"
              />
@@ -279,7 +275,7 @@ export default function Home() {
           
           <button type="submit">Add</button>
         </form>
-        </div>
+
         <table>
           <thead>
             <tr>
