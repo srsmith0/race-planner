@@ -1,16 +1,23 @@
 import Head from 'next/head'
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
+
+const DynamicCalcArrival = dynamic(
+  () => import('../components/calcArrival'),
+  { ssr: false }
+)
 
 export default function Home() {
-  const [totalDistance, setTotalDistance] = useState('');
-  const [distanceType, setDistanceType] = useState('');
-  const [elevationGain, setElevationGain] = useState('');
-  const [elevationLoss, setElevationLoss] = useState('');
-  const [timeEstimate, setTimeEstimate] = useState('');
+  //change state when ready to ship
+  const [totalDistance, setTotalDistance] = useState(100);
+  const [distanceType, setDistanceType] = useState('miles');
+  const [elevationGain, setElevationGain] = useState('18000');
+  const [elevationLoss, setElevationLoss] = useState('18000');
+  const [timeEstimate, setTimeEstimate] = useState('18:30');
   const [calorieRate, setCalorieRate] = useState(250);
   const [hydrationRate, setHydrationRate] = useState(750);
   const [sodiumRate, setSodiumRate] = useState(500);
-  const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0 }]);
+  const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0, startTime: "" }]);
   const [plan, setPlan] = useState({
     ascent: null,
     descent: null,
@@ -55,7 +62,7 @@ export default function Home() {
     let newAidStation = {}
     newAidStation.location = document.getElementById('location').value;
     newAidStation.distance = document.getElementById('aid-distance').value;
-    newAidStation.cutoff = document.getElementById('cutoff').value + document.getElementById('am-pm').value;
+    newAidStation.cutoff = document.getElementById('cutoff').value;
     newAidStation.cutoff = newAidStation.cutoff.length === 2 ? "" : newAidStation.cutoff;
     newAidStation.crew = document.getElementById('crew').checked ? " X " : " - ";
     newAidStation.pacer = document.getElementById('pacer').checked ? " X " : " - ";
@@ -66,12 +73,24 @@ export default function Home() {
   }
 
   function createAidTableRow(aid, index) {
-    const calcArrival = () => {
-      if (aid.location === "Start") {
-        return startTime;
-      } else {
+    const { pace } = plan
+    //sets aid segment distance
+    aid.location === "Start" ? aid.segmentDistance = 0 : aid.segmentDistance = aid.distance - aidStations[index - 1].distance;
 
-      }
+    // const calcArrival = (aid) => {
+    //   if (aid.location === "Start") {
+    //     return aid.segmentTime = document.getElementById('startTime').value;
+    //   } else {
+    //     //convert pace to minutes/mile
+    //     const movingTime = aid.segmentDistance * (parseInt(pace.split(':')[0]) * 60) + aid.segmentDistance * (parseInt(pace.split(':')[1]));
+    //     //multiply that by distance
+    //     //convert that to hours and minutes
+    //     return aid.segmentTime = movingTime
+    //   }
+    // }
+
+    const convertTime = (time) => {
+
     }
 //  CONVERT 24 HOUR TIME TO 12 HOUR TIME
 //     var dt = new Date();
@@ -86,9 +105,10 @@ export default function Home() {
       <tr key={index}>
         <td>{aid.location}</td>
         <td>{aid.distance}</td>
-        <td>{aid.location === "Start" ? " " : aid.distance - aidStations[index - 1].distance}</td>
+        <td>{aid.segmentDistance}</td>
+        {/* <td>{aid.location === "Start" ? " " : aid.distance - aidStations[index - 1].distance}</td> */}
         {/* expected arrival */}
-        <td>Segment Time</td>
+        <td>Segment Time<DynamicCalcArrival pace={plan.pace} aid={aid} /> </td>
         <td>Arrival Time</td>
         <td>{aid.cutoff}</td>
         <td>Calories</td>
@@ -134,7 +154,7 @@ export default function Home() {
                   name="distance"
                   value={totalDistance}
                   onChange={(e) => setTotalDistance(e.target.value)}
-                />
+              />
                 <input
                   required
                   className="distance"
@@ -155,6 +175,13 @@ export default function Home() {
                 />
                 <label htmlFor="kilometers">Kilometers</label>
               </div>
+                <label htmlFor="startTime">Start Time: </label>
+                <input
+                  required
+                  type="time"
+                  id="startTime"
+                  name="startTime"
+                />
               <div className="input">
                 <label htmlFor="elevationGain">Elevation Gain (ft) : </label>
                 <input
@@ -232,12 +259,12 @@ export default function Home() {
         </form>
         
           <div className="race-plan default-text">
-            <p>Elevation gain per mile: {plan.ascent} ft</p>
-            <p>Elevation loss per mile: {plan.descent} ft</p>
-            <p>Average Pace: {plan.pace} min/mile</p>
-            <p>Total Calories: {plan.calories} calories</p>
-            <p>Total Liquid: {plan.liquid} L</p>
-            <p>Total Sodium: {plan.sodium} mg</p>
+            <p><span className="race-plan-bold">Elevation gain per mile:</span> {plan.ascent} ft</p>
+            <p><span className="race-plan-bold">Elevation loss per mile:</span> {plan.descent} ft</p>
+            <p><span className="race-plan-bold">Average Pace:</span> {plan.pace} min/mile</p>
+            <p><span className="race-plan-bold">Total Calories:</span> {plan.calories} calories</p>
+            <p><span className="race-plan-bold">Total Liquid:</span> {plan.liquid} L</p>
+            <p><span className="race-plan-bold">Total Sodium:</span> {plan.sodium} mg</p>
           </div>
       
         <form className="aid-station-form default-text" onSubmit={handleAidStationSubmit}>
@@ -248,6 +275,7 @@ export default function Home() {
             type="string"
             name="location"
           />
+          <div>
           <label htmlFor="aid-distance">Distance: </label>
           <input
             required
@@ -256,19 +284,14 @@ export default function Home() {
             step="0.01"
             name="aid-distance"
             />
-          <div className="cuttoff">
+          </div>
+          <div>
             <label htmlFor="cutoff">Cuttoff Time (optional): </label>
             <input
-             id="cutoff"
-              type="string"
+              id="cutoff"
+              type="time"
               name="cutoff"
-              maxLength="5"
-              placeholder="00:00"
              />
-            <select id="am-pm" name="cutoff">
-              <option value="am">AM</option>
-              <option value="pm">PM</option>
-            </select>
             </div>
           <p>Check all that apply:  </p>
           <input

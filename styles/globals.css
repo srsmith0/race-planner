@@ -60,6 +60,12 @@ form {
 	box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.05);
 }
 
+.race-plan-bold {
+	color: #5a3d2b;
+	text-shadow: -0.5px -0.5px 0 #5a3d2b, 0.5px -0.5px 0 #5a3d2b,
+		-0.5px 0.5px 0 #5a3d2b, 0.5px 0.5px 0 #5a3d2b;
+}
+
 .aid-station-form {
 	width: 50%;
 	margin: 0 auto;
