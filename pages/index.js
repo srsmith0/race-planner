@@ -74,7 +74,7 @@ export default function Home() {
         <td>{aid.crew}</td>
         <td>{aid.pacer}</td>
         <td>{aid.dropBag}</td>
-        <td>{aid.water}</td>
+        <td>{aid.waterOnly}</td>
       </tr>
     )
   }
