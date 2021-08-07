@@ -36,8 +36,10 @@ input {
 
 form {
 	background-color: #e5771e;
+	color: #5a3d2b;
 	border-radius: 10px;
 	padding: 0.5rem;
+	box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.1);
 }
 
 .race-info {
@@ -47,10 +49,15 @@ form {
 }
 
 .race-plan {
+	background-color: #f4a127;
+	color: #5a3d2b;
 	text-align: center;
-	margin: 3rem;
+	margin: 1rem auto;
+	padding: 1rem;
+	border-radius: 10px;
+	width: 40%;
 	font-weight: bold;
-	display: inline;
+	box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.05);
 }
 
 .aid-station-form {
@@ -84,6 +91,7 @@ td {
 }
 
 table {
+	color: #5a3d2b;
 	border-radius: 10px;
 }
 
