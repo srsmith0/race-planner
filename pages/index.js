@@ -17,14 +17,14 @@ export default function Home() {
   const [calorieRate, setCalorieRate] = useState(250);
   const [hydrationRate, setHydrationRate] = useState(750);
   const [sodiumRate, setSodiumRate] = useState(500);
-  const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0, startTime: "" }]);
+  const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0, arrivalTime: "" }]);
   const [plan, setPlan] = useState({
-    ascent: null,
-    descent: null,
-    pace: null,
-    calories: null,
-    liquid: null,
-    sodium: null
+    ascent: "",
+    descent: "",
+    pace: "",
+    calories: "",
+    liquid: "",
+    sodium: ""
   })
 
   function handleRaceInfoSubmit(e) {
@@ -39,8 +39,8 @@ export default function Home() {
     const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
     let pace = (timeInMinutes / distance).toFixed(2);
     racePlan.pace = convertPace(pace)
-    racePlan.calories = Math.round(calorieRate * (timeInMinutes/60));
-    racePlan.liquid = (hydrationRate * (timeInMinutes/60) / 1000).toFixed(1);
+    racePlan.calories = Math.round(calorieRate * (timeInMinutes / 60));
+    racePlan.liquid = (hydrationRate * (timeInMinutes / 60) / 1000).toFixed(1);
     racePlan.sodium = Math.round(sodiumRate * (timeInMinutes / 60));
     setPlan(racePlan)
   }
@@ -73,43 +73,60 @@ export default function Home() {
   }
 
   function createAidTableRow(aid, index) {
-    const { pace } = plan
     //sets aid segment distance
     aid.location === "Start" ? aid.segmentDistance = 0 : aid.segmentDistance = aid.distance - aidStations[index - 1].distance;
 
-    // const calcArrival = (aid) => {
-    //   if (aid.location === "Start") {
-    //     return aid.segmentTime = document.getElementById('startTime').value;
-    //   } else {
-    //     //convert pace to minutes/mile
-    //     const movingTime = aid.segmentDistance * (parseInt(pace.split(':')[0]) * 60) + aid.segmentDistance * (parseInt(pace.split(':')[1]));
-    //     //multiply that by distance
-    //     //convert that to hours and minutes
-    //     return aid.segmentTime = movingTime
-    //   }
-    // }
-
-    const convertTime = (time) => {
-
+    const getSegmentTime = () => {
+      if (aid.location === "Start" || plan.pace === "") {
+        return ""
+      } else {
+        //splits pace to minutes and seconds to convert to time
+        const time = getPaceToMinutes(plan.pace);
+        return aid.segmentTime = time;
+      }
     }
-//  CONVERT 24 HOUR TIME TO 12 HOUR TIME
-//     var dt = new Date();
-// var hours = dt.getHours() ; // gives the value in 24 hours format
-// var AmOrPm = hours >= 12 ? 'pm' : 'am';
-// hours = (hours % 12) || 12;
-// var minutes = dt.getMinutes() ;
-// var finalTime = "Time  - " + hours + ":" + minutes + " " + AmOrPm; 
-//     finalTime // final time Time - 22:10
+
+    function getPaceToMinutes(pace) {
+      //separate minutes from seconds from pace
+      const minutes = pace.split(':')[0];
+      const seconds = pace.split(':').[1];
+      //uses segment distance and pace minutes/seconds to calculate time
+      let totalMinutes = aid.segmentDistance * minutes;
+      const totalSeconds = aid.segmentDistance * seconds;
+      //convert seconds to minutes
+      const convertedSeconds = totalSeconds.toFixed(2) / 60;
+      if (totalSeconds <= 59) {
+        //seconds are less than a minute =>return with 1 minute added
+        totalMinutes ++;
+      } else {
+        totalMinutes = totalMinutes + Math.round(convertedSeconds);
+      }
+      const convertedMinutes = (totalMinutes / 60).toFixed(1).toString();
+      return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedMinutes.split('.')[0]}:${((convertedMinutes.split('.')[1]) * 60) / 10}`
+    }
     
+    //  CONVERT 24 HOUR TIME TO 12 HOUR TIME
+    //     var dt = new Date();
+    // var hours = dt.getHours() ; // gives the value in 24 hours format
+    // var AmOrPm = hours >= 12 ? 'pm' : 'am';
+    // hours = (hours % 12) || 12;
+    // var minutes = dt.getMinutes() ;
+    // var finalTime = "Time  - " + hours + ":" + minutes + " " + AmOrPm; 
+    //     finalTime // final time Time - 22:10
     return (
-      <tr key={index}>
+      <tr key={index + aid.location}>
         <td>{aid.location}</td>
         <td>{aid.distance}</td>
         <td>{aid.segmentDistance}</td>
-        {/* <td>{aid.location === "Start" ? " " : aid.distance - aidStations[index - 1].distance}</td> */}
-        {/* expected arrival */}
-        <td>Segment Time<DynamicCalcArrival pace={plan.pace} aid={aid} /> </td>
-        <td>Arrival Time</td>
+        <td>{getSegmentTime()}</td>
+        <td><DynamicCalcArrival
+          pace={plan.pace}
+          aid={aid}
+          segmentTime={aid.segmentTime}
+          distance={aid.segmentDistance}
+          lastArrival={index === 0 ? "" : aidStations[index - 1].arrivalTime}
+        />
+        </td>
         <td>{aid.cutoff}</td>
         <td>Calories</td>
         <td>Liquid</td>
@@ -125,6 +142,7 @@ export default function Home() {
       </tr>
     )
   }
+  
 
   return (
     <div>
@@ -326,13 +344,13 @@ export default function Home() {
           <button type="submit">Add</button>
         </form>
 
-        <table>
+        <table className="default-text">
           <thead>
             <tr>
               <th>Location</th>
               <th>Distance</th>
               <th>Segment Distance</th>
-              <th>Segment Time</th>
+              <th>Segment Time (hr:min)</th>
               <th>Expected Arrival</th>
               <th>Cuttoff Time</th>
               <th>Calories/Segment</th>
