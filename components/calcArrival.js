@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export default function calcArrival({ aid, pace, distance, segmentTime, lastArrival }) {
   if (aid.location === "Start") {
     //sets start arrival time to start time or defaults to nothing if value is empty
