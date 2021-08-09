@@ -89,7 +89,7 @@ export default function Home() {
     function getPaceToMinutes(pace) {
       //separate minutes from seconds from pace
       const minutes = pace.split(':')[0];
-      const seconds = pace.split(':').[1];
+      const seconds = pace.split(':')[1];
       //uses segment distance and pace minutes/seconds to calculate time
       let totalMinutes = aid.segmentDistance * minutes;
       const totalSeconds = aid.segmentDistance * seconds;

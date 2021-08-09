@@ -6,7 +6,16 @@ export default function calcArrival({ aid, pace, distance, segmentTime, lastArri
     return aid.arrivalTime = document.getElementById('startTime').value || " ";
   } else {
     //convert pace to minutes/mile
-    const arrival = segmentTime + lastArrival;
+    let arrivalHour = parseInt(lastArrival.split(':')[0]) + parseInt(segmentTime.split(':')[0]);
+    let arrivalMinute = parseInt(lastArrival.split(':')[1]) + parseInt(segmentTime.split(':')[1]);
+    if (arrivalMinute >= 60) {
+      const convertedHours = Math.floor(arrivalMinute / 60);
+      const convertedMinutes = (arrivalMinute / 60).toString().split('.')[1] * 6;
+      console.log(convertedMinutes)
+      console.log(convertedHours)
+    }
+    console.log(arrivalMinute)
+    const arrival = `${arrivalHour}:${arrivalMinute}`;
     //multiply that by distance
     //convert that to hours and minutes
     return aid.arrivalTime = arrival
