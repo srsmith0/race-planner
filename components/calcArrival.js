@@ -21,6 +21,13 @@ export default function calcArrival({ aid, pace, distance, segmentTime, lastArri
     return aid.arrivalTime = arrival
   }
 }
+// function padLeadingZeros(num, size) {
+//     var s = num+"";
+//     while (s.length < size) s = "0" + s;
+//     return s;
+// }
+// padLeadingZeros(57, 3);// "057"
+// padLeadingZeros(57, 4); //"0057"
 
     
     //  CONVERT 24 HOUR TIME TO 12 HOUR TIME
