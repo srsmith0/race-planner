@@ -101,8 +101,9 @@ export default function Home() {
       } else {
         totalMinutes = totalMinutes + Math.round(convertedSeconds);
       }
-      const convertedMinutes = (totalMinutes / 60).toFixed(1).toString();
-      return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedMinutes.split('.')[0]}:${((convertedMinutes.split('.')[1]) * 60) / 10}`
+      let convertedMinutes = (totalMinutes / 60).toFixed(1).toString();
+      // right path? convertedMinutes = convertedMinutes.split('.')[1] === '0' ? '00' : convertedMinutes;
+      return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedMinutes.split('.')[0]}:${((convertedMinutes.split('.')[1]) * 6)}`
     }
     
     //  CONVERT 24 HOUR TIME TO 12 HOUR TIME
