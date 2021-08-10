@@ -102,18 +102,9 @@ export default function Home() {
         totalMinutes = totalMinutes + Math.round(convertedSeconds);
       }
       let convertedMinutes = (totalMinutes / 60).toFixed(1).toString();
-      // right path? convertedMinutes = convertedMinutes.split('.')[1] === '0' ? '00' : convertedMinutes;
       return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedMinutes.split('.')[0]}:${((convertedMinutes.split('.')[1]) * 6)}`
     }
-    
-    //  CONVERT 24 HOUR TIME TO 12 HOUR TIME
-    //     var dt = new Date();
-    // var hours = dt.getHours() ; // gives the value in 24 hours format
-    // var AmOrPm = hours >= 12 ? 'pm' : 'am';
-    // hours = (hours % 12) || 12;
-    // var minutes = dt.getMinutes() ;
-    // var finalTime = "Time  - " + hours + ":" + minutes + " " + AmOrPm; 
-    //     finalTime // final time Time - 22:10
+
     return (
       <tr key={index + aid.location}>
         <td>{aid.location}</td>
@@ -132,10 +123,6 @@ export default function Home() {
         <td>Calories</td>
         <td>Liquid</td>
         <td>Sodium</td>
-        {/* calories between
-        liquid between
-        sodium between
-        use pace and distance to determine time, then multiply rates by this time */}
         <td>{aid.crew}</td>
         <td>{aid.pacer}</td>
         <td>{aid.dropBag}</td>
