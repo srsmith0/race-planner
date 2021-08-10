@@ -102,6 +102,7 @@ export default function Home() {
         totalMinutes = totalMinutes + Math.round(convertedSeconds);
       }
       let convertedMinutes = (totalMinutes / 60).toFixed(1).toString();
+      convertedMinutes = convertedMinutes.toString().length === 1 ? convertedMinutes + '0' : convertedMinutes;
       return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedMinutes.split('.')[0]}:${((convertedMinutes.split('.')[1]) * 6)}`
     }
 
