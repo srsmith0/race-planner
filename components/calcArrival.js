@@ -5,6 +5,7 @@ export default function calcArrival({ aid, pace, distance, segmentTime, lastArri
     startTime = startTime[0] === "0" ? startTime.slice(1) : startTime;
     return aid.arrivalTime = determineStartTime(startTime);
   } else {
+    //TODO: Time is off for finish...except it's right sometimes
     //adds segment time to last arrival time
     let arrivalHour = parseInt(lastArrival.split(':')[0]) + parseInt(segmentTime.split(':')[0]);
     let arrivalMinutes = parseInt(lastArrival.split(':')[1]) + parseInt(segmentTime.split(':')[1]);
@@ -21,7 +22,7 @@ export default function calcArrival({ aid, pace, distance, segmentTime, lastArri
     if (arrivalMinutes > 59) {
       let convertedHours = Math.floor(arrivalMinutes / 60);
       let convertedMinutes = Math.round(((arrivalMinutes / 60).toFixed(2).split('.')[1] / 100) * 60);
-      convertedMinutes = convertedMinutes.toString().length === 1 && convertedMinutes < 9 ? '0' + convertedMinutes : '0' + convertedMinutes;
+      convertedMinutes = convertedMinutes.toString().length === 1 && convertedMinutes < 9 ? '0' + convertedMinutes : convertedMinutes;
       //problem is when it goes from 12 PM to 1 PM
       aidArrivalTime = `${arrivalHour + convertedHours}:${convertedMinutes}`;
       //TODO: add amPm function here

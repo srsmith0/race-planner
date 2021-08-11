@@ -76,7 +76,7 @@ export default function Home() {
     //sets aid segment distance
     aid.location === "Start" ? aid.segmentDistance = 0 : aid.segmentDistance = aid.distance - aidStations[index - 1].distance;
 
-    const getSegmentTime = () => {
+    const setSegmentTime = () => {
       if (aid.location === "Start" || plan.pace === "") {
         return ""
       } else {
@@ -101,18 +101,22 @@ export default function Home() {
       } else {
         totalMinutes = totalMinutes + Math.round(convertedSeconds);
       }
-      let convertedMinutes = (totalMinutes / 60).toFixed(1).toString();
-      convertedMinutes = convertedMinutes.toString().length === 1 ? convertedMinutes + '0' : convertedMinutes;
+      let convertedTime = (totalMinutes / 60).toFixed(1).toString();
+      //convertedTime = convertedTime.toString().length === 1 ? convertedTime + '0' : convertedTime;
+      //let convertedMinutesString = convertedTime.toString().split('.')[1];
+      //let convertedFormattedMinutes = convertedMinutesString.length === 1 && parseInt(convertedMinutesString) < 9 ? '0' + convertedFormattedMinutes : '0' + convertedFormattedMinutes;
+      //TODO:if block for final return will be best option I think
       //need to adjust if single digit. use code from calcArrival to determine below
-      return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedMinutes.split('.')[0]}:${((convertedMinutes.split('.')[1]) * 6)}`
+      return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedTime.split('.')[0]}:${((convertedTime.split('.')[1]) * 6)}`
     }
-
+    
+    setSegmentTime()
     return (
       <tr key={index + aid.location}>
         <td>{aid.location}</td>
         <td>{aid.distance}</td>
         <td>{aid.segmentDistance}</td>
-        <td>{getSegmentTime()}</td>
+        <td>{aid.segmentTime}</td>
         <td><DynamicCalcArrival
           pace={plan.pace}
           aid={aid}
