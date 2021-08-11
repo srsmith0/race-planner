@@ -103,6 +103,7 @@ export default function Home() {
       }
       let convertedMinutes = (totalMinutes / 60).toFixed(1).toString();
       convertedMinutes = convertedMinutes.toString().length === 1 ? convertedMinutes + '0' : convertedMinutes;
+      //need to adjust if single digit. use code from calcArrival to determine below
       return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedMinutes.split('.')[0]}:${((convertedMinutes.split('.')[1]) * 6)}`
     }
 
