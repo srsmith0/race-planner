@@ -1,4 +1,6 @@
-export default function calcArrival({ aid, pace, distance, segmentTime, lastArrival }) {
+//TODO: bonus, get race distance as props and creat finish aid
+
+export default function calcArrival({ aid, segmentTime, lastArrival }) {
   if (aid.location === "Start") {
     //sets start arrival time to start time or defaults to nothing if value is empty
     let startTime = document.getElementById('startTime').value;

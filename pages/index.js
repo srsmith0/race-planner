@@ -17,7 +17,7 @@ export default function Home() {
   const [calorieRate, setCalorieRate] = useState(250);
   const [hydrationRate, setHydrationRate] = useState(750);
   const [sodiumRate, setSodiumRate] = useState(500);
-  const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0, arrivalTime: "" }]);
+  const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0, segmentTime: "", arrivalTime: "" }]);
   const [plan, setPlan] = useState({
     ascent: "",
     descent: "",
@@ -82,6 +82,7 @@ export default function Home() {
       } else {
         //splits pace to minutes and seconds to convert to time
         const time = getPaceToMinutes(plan.pace);
+        getNutritionFactor(time)
         return aid.segmentTime = time;
       }
     }
@@ -109,6 +110,17 @@ export default function Home() {
       //need to adjust if single digit. use code from calcArrival to determine below
       return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedTime.split('.')[0]}:${((convertedTime.split('.')[1]) * 6)}`
     }
+
+    function getNutritionFactor(time) {
+      if (time === "") {
+        return 0
+      } else {
+        let number = time.toString().split(':')[0];
+        let minutes = time.toString().split(':')[1];
+        let convertedMinutes = (minutes / 60).toFixed(2);
+        return parseInt(number) + parseFloat(convertedMinutes);
+      }
+    }
     
     setSegmentTime()
     return (
@@ -121,14 +133,13 @@ export default function Home() {
           pace={plan.pace}
           aid={aid}
           segmentTime={aid.segmentTime}
-          distance={aid.segmentDistance}
           lastArrival={index === 0 ? "" : aidStations[index - 1].arrivalTime}
         />
         </td>
         <td>{aid.cutoff}</td>
-        <td>Calories</td>
-        <td>Liquid</td>
-        <td>Sodium</td>
+        <td>{Math.round(getNutritionFactor(aid.segmentTime) * calorieRate)} cal</td>
+        <td>{Math.round(getNutritionFactor(aid.segmentTime) * hydrationRate)} mL</td>
+        <td>{Math.round(getNutritionFactor(aid.segmentTime) * sodiumRate)} mg</td>
         <td>{aid.crew}</td>
         <td>{aid.pacer}</td>
         <td>{aid.dropBag}</td>
