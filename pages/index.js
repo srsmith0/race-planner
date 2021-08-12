@@ -163,7 +163,6 @@ export default function Home() {
       <main>
         <div className="banner">
           <h1>Ultra Planner</h1>
-          <p>Success Through Preparation</p>
         </div>
 
           <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
