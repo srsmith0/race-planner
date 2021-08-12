@@ -102,10 +102,22 @@ export default function Home() {
       } else {
         totalMinutes = totalMinutes + Math.round(convertedSeconds);
       }
+
+      function formatTotalMinutes(minutes) {
+        if (minutes < 10) {
+          return '0' + totalMinutes;
+        } else if (minutes.toString().length === 1) {
+          return totalMinutes + '0';
+        } else {
+          return totalMinutes
+        }
+      }
+
       let convertedTime = (totalMinutes / 60).toFixed(1).toString();
       //this used to be in the return line.  Made variables so I can create if block
       let convertedHours = convertedTime.split('.')[0];
       let convertedMinutes = convertedTime.split('.')[1] * 6;
+
       if (parseInt(convertedMinutes) < 9) {
         convertedMinutes = '0' + convertedMinutes;
       } else if (convertedMinutes.length === 1) {
@@ -114,12 +126,7 @@ export default function Home() {
         convertedMinutes
       }
       
-      //convertedTime = convertedTime.toString().length === 1 ? convertedTime + '0' : convertedTime;
-      //let convertedMinutesString = convertedTime.toString().split('.')[1];
-      //let convertedFormattedMinutes = convertedMinutesString.length === 1 && parseInt(convertedMinutesString) < 9 ? '0' + convertedFormattedMinutes : '0' + convertedFormattedMinutes;
-      //TODO:if block for final return will be best option I think
-      //need to adjust if single digit. use code from calcArrival to determine below
-      return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedHours}:${convertedMinutes}`
+      return totalMinutes / 60 <= 1 ? `00:${formatTotalMinutes(totalMinutes)}` : `${convertedHours}:${convertedMinutes}`
     }
 
     function getNutritionFactor(time) {
