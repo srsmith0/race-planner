@@ -17,7 +17,7 @@ export default function Home() {
   const [calorieRate, setCalorieRate] = useState(250);
   const [hydrationRate, setHydrationRate] = useState(750);
   const [sodiumRate, setSodiumRate] = useState(500);
-  const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0, arrivalTime: "" }]);
+  const [aidStations, setAidStations] = useState([{ location: "Start", distance: 0, segmentTime: "", arrivalTime: "" }]);
   const [plan, setPlan] = useState({
     ascent: "",
     descent: "",
@@ -76,12 +76,13 @@ export default function Home() {
     //sets aid segment distance
     aid.location === "Start" ? aid.segmentDistance = 0 : aid.segmentDistance = aid.distance - aidStations[index - 1].distance;
 
-    const getSegmentTime = () => {
+    const setSegmentTime = () => {
       if (aid.location === "Start" || plan.pace === "") {
         return ""
       } else {
         //splits pace to minutes and seconds to convert to time
         const time = getPaceToMinutes(plan.pace);
+        getNutritionFactor(time)
         return aid.segmentTime = time;
       }
     }
@@ -96,34 +97,49 @@ export default function Home() {
       //convert seconds to minutes
       const convertedSeconds = totalSeconds.toFixed(2) / 60;
       if (totalSeconds <= 59) {
-        //seconds are less than a minute =>return with 1 minute added
+        //seconds are less than a minute => return with 1 minute added
         totalMinutes ++;
       } else {
         totalMinutes = totalMinutes + Math.round(convertedSeconds);
       }
-      let convertedMinutes = (totalMinutes / 60).toFixed(1).toString();
-      convertedMinutes = convertedMinutes.toString().length === 1 ? convertedMinutes + '0' : convertedMinutes;
-      return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedMinutes.split('.')[0]}:${((convertedMinutes.split('.')[1]) * 6)}`
+      let convertedTime = (totalMinutes / 60).toFixed(1).toString();
+      //convertedTime = convertedTime.toString().length === 1 ? convertedTime + '0' : convertedTime;
+      //let convertedMinutesString = convertedTime.toString().split('.')[1];
+      //let convertedFormattedMinutes = convertedMinutesString.length === 1 && parseInt(convertedMinutesString) < 9 ? '0' + convertedFormattedMinutes : '0' + convertedFormattedMinutes;
+      //TODO:if block for final return will be best option I think
+      //need to adjust if single digit. use code from calcArrival to determine below
+      return totalMinutes / 60 <= 1 ? `00:${totalMinutes}` : `${convertedTime.split('.')[0]}:${((convertedTime.split('.')[1]) * 6)}`
     }
 
+    function getNutritionFactor(time) {
+      if (time === "") {
+        return 0
+      } else {
+        let number = time.toString().split(':')[0];
+        let minutes = time.toString().split(':')[1];
+        let convertedMinutes = (minutes / 60).toFixed(2);
+        return parseInt(number) + parseFloat(convertedMinutes);
+      }
+    }
+    
+    setSegmentTime()
     return (
       <tr key={index + aid.location}>
         <td>{aid.location}</td>
         <td>{aid.distance}</td>
         <td>{aid.segmentDistance}</td>
-        <td>{getSegmentTime()}</td>
+        <td>{aid.segmentTime}</td>
         <td><DynamicCalcArrival
           pace={plan.pace}
           aid={aid}
           segmentTime={aid.segmentTime}
-          distance={aid.segmentDistance}
           lastArrival={index === 0 ? "" : aidStations[index - 1].arrivalTime}
         />
         </td>
         <td>{aid.cutoff}</td>
-        <td>Calories</td>
-        <td>Liquid</td>
-        <td>Sodium</td>
+        <td>{Math.round(getNutritionFactor(aid.segmentTime) * calorieRate)} cal</td>
+        <td>{Math.round(getNutritionFactor(aid.segmentTime) * hydrationRate)} mL</td>
+        <td>{Math.round(getNutritionFactor(aid.segmentTime) * sodiumRate)} mg</td>
         <td>{aid.crew}</td>
         <td>{aid.pacer}</td>
         <td>{aid.dropBag}</td>
@@ -147,7 +163,6 @@ export default function Home() {
       <main>
         <div className="banner">
           <h1>Ultra Planner</h1>
-          <p>Success Through Preparation</p>
         </div>
 
           <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
