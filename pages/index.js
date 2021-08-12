@@ -97,7 +97,7 @@ export default function Home() {
       //convert seconds to minutes
       const convertedSeconds = totalSeconds.toFixed(2) / 60;
       if (totalSeconds <= 59) {
-        //seconds are less than a minute =>return with 1 minute added
+        //seconds are less than a minute => return with 1 minute added
         totalMinutes ++;
       } else {
         totalMinutes = totalMinutes + Math.round(convertedSeconds);
