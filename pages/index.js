@@ -190,6 +190,7 @@ export default function Home() {
                 <input
                   required
                   type="number"
+                  min="0"
                   id="distance"
                   name="distance"
                   value={totalDistance}
@@ -228,6 +229,7 @@ export default function Home() {
                 <input
                   required
                   type="number"
+                  min="0"
                   id="elevationGain"
                   name="gain"
                   value={elevationGain}
@@ -239,6 +241,7 @@ export default function Home() {
                 <input
                   required
                   type="number"
+                  min="0"
                   id="elevationLoss"
                   name="loss"
                   value={elevationLoss}
@@ -267,6 +270,7 @@ export default function Home() {
               required
               type="number"
               id="calories"
+              min="0"  
               name="calories"
               value={calorieRate}
               onChange={(e) => setCalorieRate(e.target.value)}
@@ -277,6 +281,7 @@ export default function Home() {
               <input
               required
               type="number"
+              min="0"  
               id="hydration"
               name="hydration"
               value={hydrationRate}
@@ -288,6 +293,7 @@ export default function Home() {
               <input
               required
               type="number"
+              min="0"
               id="sodium"
               name="sodium"
               value={sodiumRate}
@@ -322,6 +328,7 @@ export default function Home() {
             required
             id="aid-distance"
             type="number"
+            min="0"
             step="0.01"
             name="aid-distance"
             />
