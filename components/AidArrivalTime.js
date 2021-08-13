@@ -1,5 +1,3 @@
-//TODO: bonus, get race distance as props and creat finish aid
-
 export default function calcArrival({ aid, segmentTime, lastArrival }) {
   if (aid.location === "Start") {
     //sets start arrival time to start time or defaults to nothing if value is empty
@@ -7,7 +5,6 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
     startTime = startTime[0] === "0" ? startTime.slice(1) : startTime;
     return aid.arrivalTime = determineStartTime(startTime);
   } else {
-    //TODO: Time is off for finish...except it's right sometimes
     //adds segment time to last arrival time
     let arrivalHour = parseInt(lastArrival.split(':')[0]) + parseInt(segmentTime.split(':')[0]);
     let arrivalMinutes = parseInt(lastArrival.split(':')[1]) + parseInt(segmentTime.split(':')[1]);
@@ -17,7 +14,7 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
     arrivalHour = arrivalHour > 24 ? arrivalHour - 24 : arrivalHour;
     let amPm = arrivalHour === 24 || arrivalHour <= 12 ? ' AM' : ' PM';
     let arrivalTweleveHour = (arrivalHour % 12) || 12;
-    //TODO: end here
+    //formats minutes to display correctly
     arrivalMinutes = arrivalMinutes.toString().length === 1 && arrivalMinutes < 10 ? '0' + arrivalMinutes : arrivalMinutes;
     let arrival = `${arrivalTweleveHour}:${arrivalMinutes}` + amPm;
     if (arrivalMinutes > 59) {
