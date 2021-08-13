@@ -163,7 +163,7 @@ export default function Home() {
         <td>{aid.pacer}</td>
         <td>{aid.dropBag}</td>
         <td>{aid.waterOnly}</td>
-        <td>{aid.comments}</td>
+        <td className="comments">{aid.comments}</td>
       </tr>
     )
   }
@@ -181,9 +181,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <div className="banner">
           <h1>Ultra Planner</h1>
-        </div>
 
           <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
             <div className="distance">
