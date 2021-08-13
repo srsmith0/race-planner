@@ -59,7 +59,7 @@ export default function Home() {
 
   function handleAidStationSubmit(e) {
     e.preventDefault();
-    let newAidStation = {}
+    const newAidStation = {}
     newAidStation.location = document.getElementById('location').value;
     newAidStation.distance = document.getElementById('aid-distance').value;
     newAidStation.cutoff = document.getElementById('cutoff').value;
@@ -68,6 +68,7 @@ export default function Home() {
     newAidStation.pacer = document.getElementById('pacer').checked ? " X " : " - ";
     newAidStation.dropBag = document.getElementById('drop-bag').checked ? " X " : " - ";
     newAidStation.waterOnly = document.getElementById('water-only').checked ? " X " : " - ";
+    newAidStation.comments = document.getElementById('comments').value;
     const updatedAidStations = [...aidStations, newAidStation];
     setAidStations(updatedAidStations)
   }
@@ -76,7 +77,7 @@ export default function Home() {
     //sets aid segment distance
     aid.location === "Start" ? aid.segmentDistance = 0 : aid.segmentDistance = aid.distance - aidStations[index - 1].distance;
 
-    const setSegmentTime = () => {
+    const getSegmentTime = () => {
       if (aid.location === "Start" || plan.pace === "") {
         return ""
       } else {
@@ -140,7 +141,7 @@ export default function Home() {
       }
     }
     
-    setSegmentTime()
+    getSegmentTime()
     return (
       <tr key={index + aid.location}>
         <td>{aid.location}</td>
@@ -162,6 +163,7 @@ export default function Home() {
         <td>{aid.pacer}</td>
         <td>{aid.dropBag}</td>
         <td>{aid.waterOnly}</td>
+        <td>{aid.comments}</td>
       </tr>
     )
   }
@@ -197,6 +199,7 @@ export default function Home() {
               />
                 <input
                   required
+                  checked
                   className="distance"
                   type="radio"
                   id="miles"
@@ -340,14 +343,14 @@ export default function Home() {
             name="crew"
             value="true"
           />
-          <label htmlFor="pacer">Crew </label>
+          <label htmlFor="crew">Crew </label>
           <input
             id="pacer"
             type="checkbox"
             name="pacer"
             value="true"
           />
-          <label htmlFor="crew">Pacer </label>
+          <label htmlFor="pacer">Pacer </label>
           <input
             id="drop-bag"
             type="checkbox"
@@ -362,7 +365,17 @@ export default function Home() {
             value="true"
           />
           <label htmlFor="water-only">Water Only </label>
+          <div>
+          <label htmlFor="comments">Comments</label>
+          </div>
+          <textarea
+            id="comments"
+            cols="40"
+            rows="4"
+            name="comments"
+          />
           
+
           <button type="submit">Add</button>
         </form>
 
@@ -382,6 +395,7 @@ export default function Home() {
               <th>Pacer</th>
               <th>Drop Bag</th>
               <th>Water Only</th>
+              <th>Comments</th>
             </tr>
          </thead>
           <tbody>
