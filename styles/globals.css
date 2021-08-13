@@ -13,17 +13,14 @@ body {
 
 /* colors - #75c8ae, #5a3d2b, #ffecb4, #e5771e, #f4a127  */
 
-.banner {
+h1 {
 	font-family: "Fredoka One", sans-serif;
 	text-align: center;
+	font-size: 3rem;
 	padding-bottom: 3rem;
 	color: #5a3d2b;
 	text-shadow: -0.5px -0.5px 0 #f4a127, 0.5px -0.5px 0 #f4a127,
 		-0.5px 0.5px 0 #f4a127, 0.5px 0.5px 0 #f4a127;
-}
-
-.banner h1 {
-	font-size: 3rem;
 }
 
 input {
@@ -94,11 +91,17 @@ td {
 	padding: 1rem;
 	margin: 1rem auto;
 	text-align: center;
+	font-size: 0.8rem;
 }
 
 table {
 	color: #5a3d2b;
 	border-radius: 10px;
+}
+
+.comments {
+	font-size: 0.6rem;
+	text-align: left;
 }
 
 button:hover {
