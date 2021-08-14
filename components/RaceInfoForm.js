@@ -49,7 +49,7 @@ export default function RaceInfoForm({
             name="distance"
             value={totalDistance}
             onChange={(e) => setTotalDistance(e.target.value)}
-        />
+          />
           <input
             required
             checked
@@ -71,13 +71,13 @@ export default function RaceInfoForm({
           />
           <label htmlFor="kilometers">Kilometers</label>
         </div>
-          <label htmlFor="startTime">Start Time: </label>
-          <input
-            required
-            type="time"
-            id="startTime"
-            name="startTime"
-          />
+        <label htmlFor="startTime">Start Time: </label>
+        <input
+          required
+          type="time"
+          id="startTime"
+          name="startTime"
+        />
         <div className="input">
           <label htmlFor="elevationGain">Elevation Gain (ft) : </label>
           <input
@@ -119,44 +119,44 @@ export default function RaceInfoForm({
       </div>
       <div className="nutrition">
         <div className="input">
-        <label htmlFor="calories">Calorie Intake Rate (cal/hr) : </label>
-        <input
-        required
-        type="number"
-        id="calories"
-        min="0"  
-        name="calories"
-        value={calorieRate}
-        onChange={(e) => setCalorieRate(e.target.value)}
-        />
+          <label htmlFor="calories">Calorie Intake Rate (cal/hr) : </label>
+          <input
+            required
+            type="number"
+            id="calories"
+            min="0"
+            name="calories"
+            value={calorieRate}
+            onChange={(e) => setCalorieRate(e.target.value)}
+          />
         </div>
-      <div className="input">
-        <label htmlFor="hydration">Fluid Intake Rate (mL/hr) : </label>
-        <input
-        required
-        type="number"
-        min="0"  
-        id="hydration"
-        name="hydration"
-        value={hydrationRate}
-        onChange={(e) => setHydrationRate(e.target.value)}
-        />
-      </div>
-      <div className="input">
-        <label htmlFor="sodium">Sodium Intake Rate (mg/hr) : </label>
-        <input
-        required
-        type="number"
-        min="0"
-        id="sodium"
-        name="sodium"
-        value={sodiumRate}
-        onChange={(e) => setSodiumRate(e.target.value)}
-        />
-      </div>  
+        <div className="input">
+          <label htmlFor="hydration">Fluid Intake Rate (mL/hr) : </label>
+          <input
+            required
+            type="number"
+            min="0"
+            id="hydration"
+            name="hydration"
+            value={hydrationRate}
+            onChange={(e) => setHydrationRate(e.target.value)}
+          />
+        </div>
+        <div className="input">
+          <label htmlFor="sodium">Sodium Intake Rate (mg/hr) : </label>
+          <input
+            required
+            type="number"
+            min="0"
+            id="sodium"
+            name="sodium"
+            value={sodiumRate}
+            onChange={(e) => setSodiumRate(e.target.value)}
+          />
+        </div>
       </div>
       <button type="submit">Calculate</button>
 
     </form>
-  )
+  );
 };

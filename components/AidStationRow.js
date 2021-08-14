@@ -5,8 +5,6 @@ const DynamicAidArrivalTime = dynamic(
   { ssr: false }
 );
 
-
-//TODO: if negative numbers, return 0s
 export default function createAidTableRow({
   aid, index, aidStations, pace, calorieRate, hydrationRate, sodiumRate
 }) {
@@ -79,28 +77,28 @@ export default function createAidTableRow({
     };
     
     getSegmentTime()
-    return (
-      <tr key={index + aid.location}>
-        <td>{aid.location}</td>
-        <td>{aid.distance}</td>
-        <td>{aid.segmentDistance}</td>
-        <td>{aid.segmentTime}</td>
-        <td><DynamicAidArrivalTime
-          pace={pace}
-          aid={aid}
-          segmentTime={aid.segmentTime}
-          lastArrival={index === 0 ? "" : aidStations[index - 1].arrivalTime}
-        />
-        </td>
-        <td>{aid.cutoff}</td>
-        <td>{Math.round(getNutritionFactor(aid.segmentTime) * calorieRate)} cal</td>
-        <td>{Math.round(getNutritionFactor(aid.segmentTime) * hydrationRate)} mL</td>
-        <td>{Math.round(getNutritionFactor(aid.segmentTime) * sodiumRate)} mg</td>
-        <td>{aid.crew}</td>
-        <td>{aid.pacer}</td>
-        <td>{aid.dropBag}</td>
-        <td>{aid.waterOnly}</td>
-        <td className="comments">{aid.comments}</td>
-      </tr>
-    )
-  }
+  return (
+    <tr key={index + aid.location}>
+      <td>{aid.location}</td>
+      <td>{aid.distance}</td>
+      <td>{aid.segmentDistance}</td>
+      <td>{aid.segmentTime}</td>
+      <td><DynamicAidArrivalTime
+        pace={pace}
+        aid={aid}
+        segmentTime={aid.segmentTime}
+        lastArrival={index === 0 ? "" : aidStations[index - 1].arrivalTime}
+      />
+      </td>
+      <td>{aid.cutoff}</td>
+      <td>{Math.round(getNutritionFactor(aid.segmentTime) * calorieRate)} cal</td>
+      <td>{Math.round(getNutritionFactor(aid.segmentTime) * hydrationRate)} mL</td>
+      <td>{Math.round(getNutritionFactor(aid.segmentTime) * sodiumRate)} mg</td>
+      <td>{aid.crew}</td>
+      <td>{aid.pacer}</td>
+      <td>{aid.dropBag}</td>
+      <td>{aid.waterOnly}</td>
+      <td className="comments">{aid.comments}</td>
+    </tr>
+  );
+};

@@ -39,14 +39,14 @@ export default function AidStationForm({ aidStations, setAidStations }) {
         name="location"
       />
       <div>
-      <label htmlFor="aid-distance">Distance: </label>
-      <input
-        required
-        id="aid-distance"
-        type="number"
-        min="0"
-        step="0.01"
-        name="aid-distance"
+        <label htmlFor="aid-distance">Distance: </label>
+        <input
+          required
+          id="aid-distance"
+          type="number"
+          min="0"
+          step="0.01"
+          name="aid-distance"
         />
       </div>
       <div>
@@ -55,8 +55,8 @@ export default function AidStationForm({ aidStations, setAidStations }) {
           id="cutoff"
           type="time"
           name="cutoff"
-          />
-        </div>
+        />
+      </div>
       <p>Check all that apply:  </p>
       <input
         id="crew"
@@ -87,7 +87,7 @@ export default function AidStationForm({ aidStations, setAidStations }) {
       />
       <label htmlFor="water-only">Water Only </label>
       <div>
-      <label htmlFor="comments">Comments</label>
+        <label htmlFor="comments">Comments</label>
       </div>
       <textarea
         id="comments"
@@ -98,5 +98,5 @@ export default function AidStationForm({ aidStations, setAidStations }) {
       
       <button type="submit">Add</button>
     </form>
-  )
+  );
 };

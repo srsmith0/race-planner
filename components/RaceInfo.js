@@ -9,5 +9,5 @@ export default function RaceInfo({ plan }) {
       <p><span className="race-plan-bold">Total Liquid:</span> {plan.liquid} L</p>
       <p><span className="race-plan-bold">Total Sodium:</span> {plan.sodium} mg</p>
     </div>
-  )
+  );
 };
