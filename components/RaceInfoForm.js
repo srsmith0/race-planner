@@ -36,7 +36,8 @@ export default function RaceInfoForm({
     return firstDigitPace + ':' + modifiedSecondDigitPace;
   };
 
-    return <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
+  return (
+    <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
             <div className="distance">
               <div className="input">
                 <label htmlFor="distance">Race distance: </label>
@@ -156,5 +157,6 @@ export default function RaceInfoForm({
             </div>
             <button type="submit">Calculate</button>
 
-        </form>
+    </form>
+  )
 };

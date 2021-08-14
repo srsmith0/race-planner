@@ -15,7 +15,8 @@ export default function AidStationForm({ aidStations, setAidStations }) {
     setAidStations(updatedAidStations);
   };
 
-  return <form className="aid-station-form default-text" onSubmit={handleAidStationSubmit}>
+  return (
+    <form className="aid-station-form default-text" onSubmit={handleAidStationSubmit}>
           <label htmlFor="location">Station Name: </label>
           <input
             required
@@ -84,5 +85,5 @@ export default function AidStationForm({ aidStations, setAidStations }) {
 
           <button type="submit">Add</button>
         </form>
-
+  )
 };

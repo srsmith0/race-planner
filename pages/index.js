@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import AidStationForm from '../components/AidStationForm';
 
 import AidStationRow from '../components/AidStationRow';
 import RaceInfoForm from '../components/RaceInfoForm';
+import AidStationForm from '../components/AidStationForm';
+import RaceInfo from '../components/RaceInfo';
 
 export default function Home() {
   //change state when ready to ship
@@ -63,14 +64,7 @@ export default function Home() {
           setPlan={setPlan}
         />
 
-        <div className="race-plan default-text">
-          <p><span className="race-plan-bold">Elevation gain per mile:</span> {plan.ascent} ft</p>
-          <p><span className="race-plan-bold">Elevation loss per mile:</span> {plan.descent} ft</p>
-          <p><span className="race-plan-bold">Average Pace:</span> {plan.pace} min/mile</p>
-          <p><span className="race-plan-bold">Total Calories:</span> {plan.calories} calories</p>
-          <p><span className="race-plan-bold">Total Liquid:</span> {plan.liquid} L</p>
-          <p><span className="race-plan-bold">Total Sodium:</span> {plan.sodium} mg</p>
-        </div>
+        <RaceInfo plan={plan} />
       
         <AidStationForm
           aidStations={aidStations}
