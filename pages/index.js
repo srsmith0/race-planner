@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { useState } from 'react'
 
 import AidStationRow from '../components/AidStationRow';
+import RaceInfoForm from '../components/RaceInfoForm';
 
 export default function Home() {
   //change state when ready to ship
@@ -26,37 +27,37 @@ export default function Home() {
     calories: "",
     liquid: "",
     sodium: ""
-  })
+  });
 
-  function handleRaceInfoSubmit(e) {
-    e.preventDefault();
-    const racePlan = {};
-    let distance = totalDistance
-    if (distanceType === "kilometers") {
-      distance = ((totalDistance * .621371).toFixed(2));
-    }
-    racePlan.ascent = Math.round((elevationGain / distance));
-    racePlan.descent = Math.round((elevationLoss / distance));
-    const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
-    let pace = (timeInMinutes / distance).toFixed(2);
-    racePlan.pace = convertPace(pace)
-    racePlan.calories = Math.round(calorieRate * (timeInMinutes / 60));
-    racePlan.liquid = (hydrationRate * (timeInMinutes / 60) / 1000).toFixed(1);
-    racePlan.sodium = Math.round(sodiumRate * (timeInMinutes / 60));
-    setPlan(racePlan)
-  }
+  // function handleRaceInfoSubmit(e) {
+  //   e.preventDefault();
+  //   const racePlan = {};
+  //   let distance = totalDistance
+  //   if (distanceType === "kilometers") {
+  //     distance = ((totalDistance * .621371).toFixed(2));
+  //   }
+  //   racePlan.ascent = Math.round((elevationGain / distance));
+  //   racePlan.descent = Math.round((elevationLoss / distance));
+  //   const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
+  //   let pace = (timeInMinutes / distance).toFixed(2);
+  //   racePlan.pace = convertPace(pace)
+  //   racePlan.calories = Math.round(calorieRate * (timeInMinutes / 60));
+  //   racePlan.liquid = (hydrationRate * (timeInMinutes / 60) / 1000).toFixed(1);
+  //   racePlan.sodium = Math.round(sodiumRate * (timeInMinutes / 60));
+  //   setPlan(racePlan)
+  // }
 
-  function convertPace(pace) {
-    const firstDigitPace = pace.toString().split('.')[0];
-    const secondDigitPace = "." + pace.toString().split('.')[1];
-    let modifiedSecondDigitPace = (parseInt(Math.ceil(secondDigitPace * 60)).toString());
-    if (secondDigitPace === ".00") {
-      modifiedSecondDigitPace = "00";
-    } else if (modifiedSecondDigitPace.length === 1) {
-      modifiedSecondDigitPace = "0" + (parseInt(Math.floor(secondDigitPace * 60)).toString());
-    }
-    return firstDigitPace + ':' + modifiedSecondDigitPace;
-  }
+  // function convertPace(pace) {
+  //   const firstDigitPace = pace.toString().split('.')[0];
+  //   const secondDigitPace = "." + pace.toString().split('.')[1];
+  //   let modifiedSecondDigitPace = (parseInt(Math.ceil(secondDigitPace * 60)).toString());
+  //   if (secondDigitPace === ".00") {
+  //     modifiedSecondDigitPace = "00";
+  //   } else if (modifiedSecondDigitPace.length === 1) {
+  //     modifiedSecondDigitPace = "0" + (parseInt(Math.floor(secondDigitPace * 60)).toString());
+  //   }
+  //   return firstDigitPace + ':' + modifiedSecondDigitPace;
+  // }
 
   function handleAidStationSubmit(e) {
     e.preventDefault();
@@ -71,7 +72,7 @@ export default function Home() {
     newAidStation.waterOnly = document.getElementById('water-only').checked ? " X " : " - ";
     newAidStation.comments = document.getElementById('comments').value;
     const updatedAidStations = [...aidStations, newAidStation];
-    setAidStations(updatedAidStations)
+    setAidStations(updatedAidStations);
   }
 
   return (
@@ -86,9 +87,28 @@ export default function Home() {
       </Head>
 
       <main>
-          <h1>Ultra Planner</h1>
+        <h1>Ultra Planner</h1>
+        
+        <RaceInfoForm
+          totalDistance={totalDistance}
+          setTotalDistance={setTotalDistance}
+          distanceType={distanceType}
+          setDistanceType={setDistanceType}
+          elevationGain={elevationGain}
+          elevationLoss={elevationLoss}
+          setElevationLoss={setElevationLoss}
+          timeEstimate={timeEstimate}
+          setTimeEstimate={setTimeEstimate}
+          calorieRate={calorieRate}
+          setCalorieRate={setCalorieRate}
+          hydrationRate={hydrationRate}
+          setHydrationRate={setHydrationRate}
+          sodiumRate={sodiumRate}
+          setSodiumRate={setSodiumRate}
+          setPlan={setPlan}
+        />
 
-          <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
+          {/* <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
             <div className="distance">
               <div className="input">
                 <label htmlFor="distance">Race distance : </label>
@@ -208,7 +228,7 @@ export default function Home() {
             </div>
             <button type="submit">Calculate</button>
 
-        </form>
+        </form> */}
         
           <div className="race-plan default-text">
             <p><span className="race-plan-bold">Elevation gain per mile:</span> {plan.ascent} ft</p>
