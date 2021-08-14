@@ -3,14 +3,16 @@ import dynamic from 'next/dynamic'
 const DynamicAidArrivalTime = dynamic(
   () => import('../components/AidArrivalTime'),
   { ssr: false }
-)  
+);
 
+
+//TODO: if negative numbers, return 0s
 export default function createAidTableRow({
   aid, index, aidStations, pace, calorieRate, hydrationRate, sodiumRate
 }) {
+  console.log(aid)
     //sets aid segment distance
-    aid.location === "Start" ? aid.segmentDistance = 0 : aid.segmentDistance = aid.distance - aidStations[index - 1].distance;
-
+    aid.location === "Start" ? aid.segmentDistance = 0 : aid.segmentDistance = parseFloat(aid.distance - aidStations[index - 1].distance).toFixed(2);
     const getSegmentTime = () => {
       if (aid.location === "Start" || pace === "") {
         return ""
@@ -51,8 +53,7 @@ export default function createAidTableRow({
       let convertedTime = (totalMinutes / 60).toFixed(1).toString();
       //this used to be in the return line.  Made variables so I can create if block
       let convertedHours = convertedTime.split('.')[0];
-      let convertedMinutes = convertedTime.split('.')[1] * 6;
-
+      let convertedMinutes = Math.round(convertedTime.split('.')[1] * 6);
       if (parseInt(convertedMinutes) < 9) {
         convertedMinutes = '0' + convertedMinutes;
       } else if (convertedMinutes.length === 1) {

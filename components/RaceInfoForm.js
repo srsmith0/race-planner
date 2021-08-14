@@ -39,7 +39,7 @@ export default function RaceInfoForm({
     return <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
             <div className="distance">
               <div className="input">
-                <label htmlFor="distance">Race distance : </label>
+                <label htmlFor="distance">Race distance: </label>
                 <input
                   required
                   type="number"
