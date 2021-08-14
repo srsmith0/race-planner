@@ -4,8 +4,7 @@ export default function AidStationForm({ aidStations, setAidStations }) {
     const newAidStation = {}
     newAidStation.location = document.getElementById('location').value;
     newAidStation.distance = document.getElementById('aid-distance').value;
-    newAidStation.cutoff = document.getElementById('cutoff').value;
-    newAidStation.cutoff = newAidStation.cutoff.length === 2 ? "" : newAidStation.cutoff;
+    newAidStation.cutoff = convert24Hours(document.getElementById('cutoff').value);
     newAidStation.crew = document.getElementById('crew').checked ? " X " : " - ";
     newAidStation.pacer = document.getElementById('pacer').checked ? " X " : " - ";
     newAidStation.dropBag = document.getElementById('drop-bag').checked ? " X " : " - ";
@@ -13,6 +12,21 @@ export default function AidStationForm({ aidStations, setAidStations }) {
     newAidStation.comments = document.getElementById('comments').value;
     const updatedAidStations = [...aidStations, newAidStation];
     setAidStations(updatedAidStations);
+  };
+
+  function convert24Hours(time) {
+    let hour = parseInt(time.split(':')[0]);
+    let minutes = time.split(':')[1];
+    let convertedTime;
+    if (time === "") {
+      convertedTime = ""
+    } else {
+      let amPm = hour === 24 || hour < 12 ? ' AM' : ' PM';
+      let tweleveHour = (hour % 12) || 12;
+      convertedTime = `${tweleveHour}:${minutes} ${amPm}`;
+      console.log(convertedTime)
+    };
+    return convertedTime;
   };
 
   return (

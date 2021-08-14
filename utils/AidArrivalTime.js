@@ -18,7 +18,6 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
     //formats minutes to display correctly
     arrivalMinutes = arrivalMinutes.toString().length === 1 && arrivalMinutes < 10 ? '0' + arrivalMinutes : arrivalMinutes;
     let arrival = `${arrivalTweleveHour}:${arrivalMinutes}` + amPm;
-    console.log(arrival)
     if (arrivalMinutes > 59) {
       let convertedHours = Math.floor(arrivalMinutes / 60);
       let convertedMinutes = Math.round(((arrivalMinutes / 60).toFixed(2).split('.')[1] / 100) * 60);
@@ -33,7 +32,6 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
     };
 
     aid.arrivalTime = aidArrivalTime;
-    console.log(aid)
     return arrival;
   };
 
