@@ -46,7 +46,8 @@ export default function createAidTableRow({
         } else if (minutes.toString().length === 1) {
           return totalMinutes + '0';
         } else {
-          return totalMinutes
+          //has to round to avoid long decimals in time output for aid station '0.00' format
+          return Math.round(totalMinutes)
         }
       }
 
