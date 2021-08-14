@@ -23,6 +23,8 @@ export default function Home() {
     arrivalTime: "",
   }]);
   const [plan, setPlan] = useState({
+    distance: "",
+    distanceType: "miles",
     ascent: "",
     descent: "",
     pace: "",

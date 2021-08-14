@@ -9,10 +9,11 @@ export default function RaceInfoForm({
   function handleRaceInfoSubmit(e) {
     e.preventDefault();
     const racePlan = {};
-      let distance = totalDistance;
-    if (distanceType === "kilometers") {
-      distance = ((totalDistance * .621371).toFixed(2));
-    }
+    let distance = totalDistance;
+    //converts to km to miles if needed
+    distance = distanceType === 'miles' ? distance : parseFloat((totalDistance * .621371).toFixed(2));
+    racePlan.distance = distance;
+    racePlan.distanceType = distanceType;
     racePlan.ascent = Math.round((elevationGain / distance));
     racePlan.descent = Math.round((elevationLoss / distance));
     const timeInMinutes = (parseInt(timeEstimate.split(':')[0]) * 60) + (parseInt(timeEstimate.split(':')[1]));
@@ -52,21 +53,22 @@ export default function RaceInfoForm({
           />
           <input
             required
-            checked
+            checked={distanceType === 'miles'}
             className="distance"
             type="radio"
             id="miles"
             name="distance"
-            value={distanceType}
+            value="true"
             onChange={() => setDistanceType('miles')}
           />
           <label htmlFor="miles"> Miles</label>
           <input
+            checked={distanceType === 'kilometers'}
             className="distance"
             type="radio"
             id="kilometers"
             name="distance"
-            value={distanceType}
+            value="true"
             onChange={() => setDistanceType('kilometers')}
           />
           <label htmlFor="kilometers">Kilometers</label>

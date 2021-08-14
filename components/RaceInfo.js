@@ -2,6 +2,7 @@ export default function RaceInfo({ plan }) {
 
   return (
     <div className="race-plan default-text">
+      <p><span className="race-plan-bold">Distance:</span> {plan.distance} {plan.distanceType}</p>
       <p><span className="race-plan-bold">Elevation gain per mile:</span> {plan.ascent} ft</p>
       <p><span className="race-plan-bold">Elevation loss per mile:</span> {plan.descent} ft</p>
       <p><span className="race-plan-bold">Average Pace:</span> {plan.pace} min/mile</p>
