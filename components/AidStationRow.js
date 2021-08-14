@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
 const DynamicAidArrivalTime = dynamic(
-  () => import('../components/AidArrivalTime'),
+  () => import('../utils/AidArrivalTime'),
   { ssr: false }
 );
 
@@ -10,7 +10,6 @@ const DynamicAidArrivalTime = dynamic(
 export default function createAidTableRow({
   aid, index, aidStations, pace, calorieRate, hydrationRate, sodiumRate
 }) {
-  console.log(aid)
     //sets aid segment distance
     aid.location === "Start" ? aid.segmentDistance = 0 : aid.segmentDistance = parseFloat(aid.distance - aidStations[index - 1].distance).toFixed(2);
     const getSegmentTime = () => {

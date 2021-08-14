@@ -38,124 +38,124 @@ export default function RaceInfoForm({
 
   return (
     <form className="race-info default-text" onSubmit={handleRaceInfoSubmit}>
-            <div className="distance">
-              <div className="input">
-                <label htmlFor="distance">Race distance: </label>
-                <input
-                  required
-                  type="number"
-                  min="0"
-                  id="distance"
-                  name="distance"
-                  value={totalDistance}
-                  onChange={(e) => setTotalDistance(e.target.value)}
-              />
-                <input
-                  required
-                  checked
-                  className="distance"
-                  type="radio"
-                  id="miles"
-                  name="distance"
-                  value={distanceType}
-                  onChange={() => setDistanceType('miles')}
-                />
-                <label htmlFor="miles"> Miles</label>
-                <input
-                  className="distance"
-                  type="radio"
-                  id="kilometers"
-                  name="distance"
-                  value={distanceType}
-                  onChange={() => setDistanceType('kilometers')}
-                />
-                <label htmlFor="kilometers">Kilometers</label>
-              </div>
-                <label htmlFor="startTime">Start Time: </label>
-                <input
-                  required
-                  type="time"
-                  id="startTime"
-                  name="startTime"
-                />
-              <div className="input">
-                <label htmlFor="elevationGain">Elevation Gain (ft) : </label>
-                <input
-                  required
-                  type="number"
-                  min="0"
-                  id="elevationGain"
-                  name="gain"
-                  value={elevationGain}
-                  onChange={(e) => setElevationGain(e.target.value)}
-                />
-              </div>
-              <div className="input">
-                <label htmlFor="elevationLoss">Elevation Loss (ft) : </label>
-                <input
-                  required
-                  type="number"
-                  min="0"
-                  id="elevationLoss"
-                  name="loss"
-                  value={elevationLoss}
-                  onChange={(e) => setElevationLoss(e.target.value)}
-                />
-              </div>
-              <div className="input">
-                <label htmlFor="timeEstimate">Time Goal (hr:min) : </label>
-                <input
-                  required
-                  type="text"
-                  id="timeEstimate"
-                  name="time"
-                  pattern="[0-9]+:[0-5]+[0-9]+$"
-                  maxLength="5"
-                  placeholder="00:00"
-                  value={timeEstimate}
-                  onChange={(e) => setTimeEstimate(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="nutrition">
-              <div className="input">
-              <label htmlFor="calories">Calorie Intake Rate (cal/hr) : </label>
-              <input
-              required
-              type="number"
-              id="calories"
-              min="0"  
-              name="calories"
-              value={calorieRate}
-              onChange={(e) => setCalorieRate(e.target.value)}
-              />
-              </div>
-            <div className="input">
-              <label htmlFor="hydration">Fluid Intake Rate (mL/hr) : </label>
-              <input
-              required
-              type="number"
-              min="0"  
-              id="hydration"
-              name="hydration"
-              value={hydrationRate}
-              onChange={(e) => setHydrationRate(e.target.value)}
-              />
-            </div>
-            <div className="input">
-              <label htmlFor="sodium">Sodium Intake Rate (mg/hr) : </label>
-              <input
-              required
-              type="number"
-              min="0"
-              id="sodium"
-              name="sodium"
-              value={sodiumRate}
-              onChange={(e) => setSodiumRate(e.target.value)}
-              />
-            </div>  
-            </div>
-            <button type="submit">Calculate</button>
+      <div className="distance">
+        <div className="input">
+          <label htmlFor="distance">Race distance: </label>
+          <input
+            required
+            type="number"
+            min="0"
+            id="distance"
+            name="distance"
+            value={totalDistance}
+            onChange={(e) => setTotalDistance(e.target.value)}
+        />
+          <input
+            required
+            checked
+            className="distance"
+            type="radio"
+            id="miles"
+            name="distance"
+            value={distanceType}
+            onChange={() => setDistanceType('miles')}
+          />
+          <label htmlFor="miles"> Miles</label>
+          <input
+            className="distance"
+            type="radio"
+            id="kilometers"
+            name="distance"
+            value={distanceType}
+            onChange={() => setDistanceType('kilometers')}
+          />
+          <label htmlFor="kilometers">Kilometers</label>
+        </div>
+          <label htmlFor="startTime">Start Time: </label>
+          <input
+            required
+            type="time"
+            id="startTime"
+            name="startTime"
+          />
+        <div className="input">
+          <label htmlFor="elevationGain">Elevation Gain (ft) : </label>
+          <input
+            required
+            type="number"
+            min="0"
+            id="elevationGain"
+            name="gain"
+            value={elevationGain}
+            onChange={(e) => setElevationGain(e.target.value)}
+          />
+        </div>
+        <div className="input">
+          <label htmlFor="elevationLoss">Elevation Loss (ft) : </label>
+          <input
+            required
+            type="number"
+            min="0"
+            id="elevationLoss"
+            name="loss"
+            value={elevationLoss}
+            onChange={(e) => setElevationLoss(e.target.value)}
+          />
+        </div>
+        <div className="input">
+          <label htmlFor="timeEstimate">Time Goal (hr:min) : </label>
+          <input
+            required
+            type="text"
+            id="timeEstimate"
+            name="time"
+            pattern="[0-9]+:[0-5]+[0-9]+$"
+            maxLength="5"
+            placeholder="00:00"
+            value={timeEstimate}
+            onChange={(e) => setTimeEstimate(e.target.value)}
+          />
+        </div>
+      </div>
+      <div className="nutrition">
+        <div className="input">
+        <label htmlFor="calories">Calorie Intake Rate (cal/hr) : </label>
+        <input
+        required
+        type="number"
+        id="calories"
+        min="0"  
+        name="calories"
+        value={calorieRate}
+        onChange={(e) => setCalorieRate(e.target.value)}
+        />
+        </div>
+      <div className="input">
+        <label htmlFor="hydration">Fluid Intake Rate (mL/hr) : </label>
+        <input
+        required
+        type="number"
+        min="0"  
+        id="hydration"
+        name="hydration"
+        value={hydrationRate}
+        onChange={(e) => setHydrationRate(e.target.value)}
+        />
+      </div>
+      <div className="input">
+        <label htmlFor="sodium">Sodium Intake Rate (mg/hr) : </label>
+        <input
+        required
+        type="number"
+        min="0"
+        id="sodium"
+        name="sodium"
+        value={sodiumRate}
+        onChange={(e) => setSodiumRate(e.target.value)}
+        />
+      </div>  
+      </div>
+      <button type="submit">Calculate</button>
 
     </form>
   )

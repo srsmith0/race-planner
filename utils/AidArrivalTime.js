@@ -9,9 +9,7 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
     let arrivalHour = parseInt(lastArrival.split(':')[0]) + parseInt(segmentTime.split(':')[0]);
     let arrivalMinutes = Math.round(parseInt(lastArrival.split(':')[1]) + parseInt(segmentTime.split(':')[1]));
     //set aid.arrivalTime to 24 hour time
-    console.log(arrivalHour, arrivalMinutes, lastArrival)
     let aidArrivalTime = convert24PlusHours(arrivalHour, arrivalMinutes);
-    console.log(aidArrivalTime)
     //set 24 hr time to 12 hr time to display in table
     arrivalHour = arrivalHour > 24 ? arrivalHour - 24 : arrivalHour;
     let amPm = arrivalHour === 24 || arrivalHour <= 12 ? ' AM' : ' PM';
