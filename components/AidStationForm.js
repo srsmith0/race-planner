@@ -14,6 +14,7 @@ export default function AidStationForm({ aidStations, setAidStations, distance }
       newAidStation.waterOnly = document.getElementById('water-only').checked ? " X " : " - ";
       newAidStation.comments = document.getElementById('comments').value;
       const updatedAidStations = [...aidStations, newAidStation];
+      // const sortedUpdatedAidStations = updatedAidStations.sort(aidStationByDistance);
       setAidStations(updatedAidStations);
       };
       document.getElementById("aid-form").reset();
@@ -33,6 +34,19 @@ export default function AidStationForm({ aidStations, setAidStations, distance }
     };
     return convertedTime;
   };
+
+  // function aidStationByDistance(aidA, aidB) {
+  //   const distanceA = aidA.distance;
+  //   const distanceB = aidB.distance;
+
+  // 	let comparison = 0;
+	// 	if (distanceA > distanceB) {
+	// 		comparison = -1;
+	// 	} else if (distanceA < distanceB) {
+	// 		comparison = 1;
+  //   };
+	// 	return comparison;
+  // };
 
   return (
     <form id="aid-form" className="aid-station-form default-text" onSubmit={handleAidStationSubmit}>
