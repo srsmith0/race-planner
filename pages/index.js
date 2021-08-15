@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Ultra Planner</title>
+        <title>The Ultra Planner</title>
         <meta name="application-name" content="Ultra Planner" />
         <meta name="description" content="Ultramarathon race planner" />
         <meta name="keywords" content="Ultramarathon, race planner, ultra,planner, trail running, trail" />
@@ -44,7 +44,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1>Ultra Planner</h1>
+        <h1>The Ultra Planner</h1>
         <div className="description default-text">
           <p>
             This is a tool that will help speed up the process of making race day spreadsheets.  You just need to add the race distance,
