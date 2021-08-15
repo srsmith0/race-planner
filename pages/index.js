@@ -7,12 +7,11 @@ import RaceInfo from '../components/RaceInfo';
 import AidStationTable from '../components/AidStationTable';
 
 export default function Home() {
-  //change state when ready to ship
-  const [totalDistance, setTotalDistance] = useState(100);
+  const [totalDistance, setTotalDistance] = useState("");
   const [distanceType, setDistanceType] = useState('miles');
-  const [elevationGain, setElevationGain] = useState('18000');
-  const [elevationLoss, setElevationLoss] = useState('18000');
-  const [timeEstimate, setTimeEstimate] = useState('18:30');
+  const [elevationGain, setElevationGain] = useState("");
+  const [elevationLoss, setElevationLoss] = useState("");
+  const [timeEstimate, setTimeEstimate] = useState("");
   const [calorieRate, setCalorieRate] = useState(250);
   const [hydrationRate, setHydrationRate] = useState(750);
   const [sodiumRate, setSodiumRate] = useState(500);
@@ -53,6 +52,7 @@ export default function Home() {
           distanceType={distanceType}
           setDistanceType={setDistanceType}
           elevationGain={elevationGain}
+          setElevationGain={setElevationGain}
           elevationLoss={elevationLoss}
           setElevationLoss={setElevationLoss}
           timeEstimate={timeEstimate}
@@ -71,6 +71,7 @@ export default function Home() {
         <AidStationForm
           aidStations={aidStations}
           setAidStations={setAidStations}
+          distance={plan.distance}
         />
 
         <AidStationTable
