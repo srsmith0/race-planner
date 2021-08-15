@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import { useState } from 'react'
 
-import AidStationRow from '../components/AidStationRow';
 import RaceInfoForm from '../components/RaceInfoForm';
+import AidStationForm from '../components/AidStationForm';
+import RaceInfo from '../components/RaceInfo';
+import AidStationTable from '../components/AidStationTable';
 
 export default function Home() {
   //change state when ready to ship
@@ -21,6 +23,8 @@ export default function Home() {
     arrivalTime: "",
   }]);
   const [plan, setPlan] = useState({
+    distance: "",
+    distanceType: "miles",
     ascent: "",
     descent: "",
     pace: "",
@@ -28,22 +32,6 @@ export default function Home() {
     liquid: "",
     sodium: ""
   });
-
-  function handleAidStationSubmit(e) {
-    e.preventDefault();
-    const newAidStation = {}
-    newAidStation.location = document.getElementById('location').value;
-    newAidStation.distance = document.getElementById('aid-distance').value;
-    newAidStation.cutoff = document.getElementById('cutoff').value;
-    newAidStation.cutoff = newAidStation.cutoff.length === 2 ? "" : newAidStation.cutoff;
-    newAidStation.crew = document.getElementById('crew').checked ? " X " : " - ";
-    newAidStation.pacer = document.getElementById('pacer').checked ? " X " : " - ";
-    newAidStation.dropBag = document.getElementById('drop-bag').checked ? " X " : " - ";
-    newAidStation.waterOnly = document.getElementById('water-only').checked ? " X " : " - ";
-    newAidStation.comments = document.getElementById('comments').value;
-    const updatedAidStations = [...aidStations, newAidStation];
-    setAidStations(updatedAidStations);
-  }
 
   return (
     <div>
@@ -78,120 +66,23 @@ export default function Home() {
           setPlan={setPlan}
         />
 
-        <div className="race-plan default-text">
-          <p><span className="race-plan-bold">Elevation gain per mile:</span> {plan.ascent} ft</p>
-          <p><span className="race-plan-bold">Elevation loss per mile:</span> {plan.descent} ft</p>
-          <p><span className="race-plan-bold">Average Pace:</span> {plan.pace} min/mile</p>
-          <p><span className="race-plan-bold">Total Calories:</span> {plan.calories} calories</p>
-          <p><span className="race-plan-bold">Total Liquid:</span> {plan.liquid} L</p>
-          <p><span className="race-plan-bold">Total Sodium:</span> {plan.sodium} mg</p>
-        </div>
+        <RaceInfo plan={plan} />
       
-        <form className="aid-station-form default-text" onSubmit={handleAidStationSubmit}>
-          <label htmlFor="location">Station Name: </label>
-          <input
-            required
-            id="location"
-            type="string"
-            name="location"
-          />
-          <div>
-          <label htmlFor="aid-distance">Distance: </label>
-          <input
-            required
-            id="aid-distance"
-            type="number"
-            min="0"
-            step="0.01"
-            name="aid-distance"
-            />
-          </div>
-          <div>
-            <label htmlFor="cutoff">Cuttoff Time (optional): </label>
-            <input
-              id="cutoff"
-              type="time"
-              name="cutoff"
-             />
-            </div>
-          <p>Check all that apply:  </p>
-          <input
-            id="crew"
-            type="checkbox"
-            name="crew"
-            value="true"
-          />
-          <label htmlFor="crew">Crew </label>
-          <input
-            id="pacer"
-            type="checkbox"
-            name="pacer"
-            value="true"
-          />
-          <label htmlFor="pacer">Pacer </label>
-          <input
-            id="drop-bag"
-            type="checkbox"
-            name="dropBag"
-            value="true"
-          />
-          <label htmlFor="drop-bag">Drop Bag </label>
-          <input
-            id="water-only"
-            type="checkbox"
-            name="waterOnly"
-            value="true"
-          />
-          <label htmlFor="water-only">Water Only </label>
-          <div>
-          <label htmlFor="comments">Comments</label>
-          </div>
-          <textarea
-            id="comments"
-            cols="40"
-            rows="4"
-            name="comments"
-          />
-          
+        <AidStationForm
+          aidStations={aidStations}
+          setAidStations={setAidStations}
+        />
 
-          <button type="submit">Add</button>
-        </form>
-
-        <table className="default-text">
-          <thead>
-            <tr>
-              <th>Location</th>
-              <th>Distance</th>
-              <th>Segment Distance</th>
-              <th>Segment Time (hr:min)</th>
-              <th>Expected Arrival</th>
-              <th>Cuttoff Time</th>
-              <th>Calories/Segment</th>
-              <th>Liquid/Segment</th>
-              <th>Sodium/Segment</th>
-              <th>Crew Access</th>
-              <th>Pacer</th>
-              <th>Drop Bag</th>
-              <th>Water Only</th>
-              <th>Comments</th>
-            </tr>
-         </thead>
-          <tbody>
-            {aidStations.map((aid, index) => <AidStationRow
-              key={aid.location + index}
-              aid={aid}
-              index={index}
-              aidStations={aidStations}
-              pace={plan.pace}
-              calorieRate={calorieRate}
-              hydrationRate={hydrationRate}
-              sodiumRate={sodiumRate}
-            />)}
-          </tbody>
-      </table>
+        <AidStationTable
+          aidStations={aidStations}
+          plan={plan}
+          calorieRate={calorieRate}
+          hydrationRate={hydrationRate}
+          sodiumRate={sodiumRate}
+        />
 
       </main>
 
     </div>
-  )
-}
+  );
+};
