@@ -82,6 +82,14 @@ form {
 	text-align: center;
 }
 
+.aid-station-form textarea {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 4rem;
+	width: 75%;
+}
+
 button {
 	background-color: #75c8ae;
 	font-family: sans-serif;
@@ -105,6 +113,12 @@ td {
 	margin: 1rem auto;
 	text-align: center;
 	font-size: 0.8rem;
+}
+
+th {
+	color: #5a3d2b;
+	text-shadow: -0.5px -0.5px 0 #5a3d2b, 0.5px -0.5px 0 #5a3d2b,
+		-0.5px 0.5px 0 #5a3d2b, 0.5px 0.5px 0 #5a3d2b;
 }
 
 table {
