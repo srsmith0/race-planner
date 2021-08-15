@@ -96,8 +96,6 @@ export default function AidStationForm({ aidStations, setAidStations, distance }
       </div>
       <textarea
         id="comments"
-        cols="40"
-        rows="4"
         name="comments"
       />
       

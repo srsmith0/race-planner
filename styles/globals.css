@@ -82,6 +82,14 @@ form {
 	text-align: center;
 }
 
+.aid-station-form textarea {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 4rem;
+	width: 75%;
+}
+
 button {
 	background-color: #75c8ae;
 	font-family: sans-serif;
