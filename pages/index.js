@@ -7,12 +7,11 @@ import RaceInfo from '../components/RaceInfo';
 import AidStationTable from '../components/AidStationTable';
 
 export default function Home() {
-  //change state when ready to ship
-  const [totalDistance, setTotalDistance] = useState(100);
+  const [totalDistance, setTotalDistance] = useState("");
   const [distanceType, setDistanceType] = useState('miles');
-  const [elevationGain, setElevationGain] = useState('18000');
-  const [elevationLoss, setElevationLoss] = useState('18000');
-  const [timeEstimate, setTimeEstimate] = useState('18:30');
+  const [elevationGain, setElevationGain] = useState("");
+  const [elevationLoss, setElevationLoss] = useState("");
+  const [timeEstimate, setTimeEstimate] = useState("");
   const [calorieRate, setCalorieRate] = useState(250);
   const [hydrationRate, setHydrationRate] = useState(750);
   const [sodiumRate, setSodiumRate] = useState(500);
@@ -46,13 +45,28 @@ export default function Home() {
 
       <main>
         <h1>Ultra Planner</h1>
-
+        <div className="description default-text">
+          <p>
+            This is a tool that will help speed up the process of making race day spreadsheets.  You just need to add the race distance,
+            elevation gain/loss, your time goal, and your ideal nutrition intake.  There are default values for nutrition if you are unsure.
+            This will generate the elevation gain/loss per mile, the average pace to achieve the time goal, and total nutrition
+            needed for race day.
+          </p>
+          <p>
+            There is an aid station table below the race day information where you can add aid stations.  That table will
+            tell you the segment length, duration, expected arrival, and nutrition for the segment.  There are also options for cutoff times,
+            crew access, pacer access, drop bags, if it is water only, and room for general comments.  I plan to add an export to Excel option
+            to the table but you are able to copy and paste it into a spreadsheet in the mean time.
+          </p>
+        </div>
+          
         <RaceInfoForm
           totalDistance={totalDistance}
           setTotalDistance={setTotalDistance}
           distanceType={distanceType}
           setDistanceType={setDistanceType}
           elevationGain={elevationGain}
+          setElevationGain={setElevationGain}
           elevationLoss={elevationLoss}
           setElevationLoss={setElevationLoss}
           timeEstimate={timeEstimate}
@@ -71,6 +85,7 @@ export default function Home() {
         <AidStationForm
           aidStations={aidStations}
           setAidStations={setAidStations}
+          distance={plan.distance}
         />
 
         <AidStationTable
@@ -80,7 +95,7 @@ export default function Home() {
           hydrationRate={hydrationRate}
           sodiumRate={sodiumRate}
         />
-
+      <p className="default-text created">Created by Shawn Smith</p>
       </main>
 
     </div>

@@ -17,10 +17,23 @@ h1 {
 	font-family: "Fredoka One", sans-serif;
 	text-align: center;
 	font-size: 3rem;
-	padding-bottom: 3rem;
 	color: #5a3d2b;
 	text-shadow: -0.5px -0.5px 0 #f4a127, 0.5px -0.5px 0 #f4a127,
 		-0.5px 0.5px 0 #f4a127, 0.5px 0.5px 0 #f4a127;
+}
+
+.description {
+	color: #5a3d2b;
+	background-color: #fae6aa;
+	border-radius: 10px;
+	width: 75%;
+	margin: 0 auto;
+	border: transparent;
+	box-shadow: 0.25rem 0.25rem 0.25rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+.description p {
+	margin: 1rem;
 }
 
 input {
@@ -117,4 +130,9 @@ button::after {
 button:active {
 	transform: translateY(0.1rem);
 	box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.1);
+}
+
+.created {
+	font-size: 0.8rem;
+	text-align: center;
 }

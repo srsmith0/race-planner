@@ -1,17 +1,22 @@
-export default function AidStationForm({ aidStations, setAidStations }) {
-    function handleAidStationSubmit(e) {
+export default function AidStationForm({ aidStations, setAidStations, distance }) {
+  function handleAidStationSubmit(e) {
     e.preventDefault();
-    const newAidStation = {}
-    newAidStation.location = document.getElementById('location').value;
-    newAidStation.distance = document.getElementById('aid-distance').value;
-    newAidStation.cutoff = convert24Hours(document.getElementById('cutoff').value);
-    newAidStation.crew = document.getElementById('crew').checked ? " X " : " - ";
-    newAidStation.pacer = document.getElementById('pacer').checked ? " X " : " - ";
-    newAidStation.dropBag = document.getElementById('drop-bag').checked ? " X " : " - ";
-    newAidStation.waterOnly = document.getElementById('water-only').checked ? " X " : " - ";
-    newAidStation.comments = document.getElementById('comments').value;
-    const updatedAidStations = [...aidStations, newAidStation];
-    setAidStations(updatedAidStations);
+    if (!distance) {
+      alert('Please enter race information.')
+    } else {
+      const newAidStation = {}
+      newAidStation.location = document.getElementById('location').value;
+      newAidStation.distance = document.getElementById('aid-distance').value;
+      newAidStation.cutoff = convert24Hours(document.getElementById('cutoff').value);
+      newAidStation.crew = document.getElementById('crew').checked ? " X " : " - ";
+      newAidStation.pacer = document.getElementById('pacer').checked ? " X " : " - ";
+      newAidStation.dropBag = document.getElementById('drop-bag').checked ? " X " : " - ";
+      newAidStation.waterOnly = document.getElementById('water-only').checked ? " X " : " - ";
+      newAidStation.comments = document.getElementById('comments').value;
+      const updatedAidStations = [...aidStations, newAidStation];
+      setAidStations(updatedAidStations);
+      };
+      document.getElementById("aid-form").reset();
   };
 
   function convert24Hours(time) {
@@ -30,7 +35,7 @@ export default function AidStationForm({ aidStations, setAidStations }) {
   };
 
   return (
-    <form className="aid-station-form default-text" onSubmit={handleAidStationSubmit}>
+    <form id="aid-form" className="aid-station-form default-text" onSubmit={handleAidStationSubmit}>
       <label htmlFor="location">Station Name: </label>
       <input
         required
