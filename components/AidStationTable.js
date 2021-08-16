@@ -3,6 +3,10 @@ import AidStationRow from './AidStationRow'
 export default function AidStationTable({
   aidStations, plan, calorieRate, hydrationRate, sodiumRate
 }) {
+  //sorts aid station by distance in case user forgets to add earlier aid station
+  function ascendingDistance(aidOne, aidTwo) {
+  return aidOne.distance - aidTwo.distance;
+  };
 
   return (
     <table className="default-text">
@@ -25,7 +29,7 @@ export default function AidStationTable({
         </tr>
       </thead>
       <tbody>
-        {aidStations.map((aid, index) => <AidStationRow
+        {aidStations.sort(ascendingDistance).map((aid, index) => <AidStationRow
           key={aid.location + index}
           aid={aid}
           index={index}
