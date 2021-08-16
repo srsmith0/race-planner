@@ -21,6 +21,7 @@ export default function createAidTableRow({
       getNutritionFactor(time)
       return aid.segmentTime = time;
     };
+
   };
 
     function getPaceToMinutes(pace) {
@@ -76,7 +77,7 @@ export default function createAidTableRow({
       };
     };
     
-    getSegmentTime()
+  getSegmentTime();
   return (
     <tr key={index + aid.location}>
       <td>{aid.location}</td>
