@@ -35,12 +35,12 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>The Ultra Planner</title>
+        <title>Ultra Planner</title>
         <meta name="application-name" content="Ultra Planner" />
         <meta name="description" content="Ultramarathon race planner" />
         <meta name="keywords" content="Ultramarathon, race planner, ultra,planner, trail running, trail" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="https://img.icons8.com/officel/16/000000/running.png" />
       </Head>
 
       <main>
