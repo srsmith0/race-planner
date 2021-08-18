@@ -9,7 +9,7 @@ export default function AidStationTable({
   };
 
   return (
-    <table className="default-text">
+    <table id="aid-table" className="default-text">
       <thead>
         <tr>
           <th>Location</th>
