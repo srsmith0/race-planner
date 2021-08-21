@@ -55,8 +55,8 @@ export default function Home() {
           <p>
             There is an aid station table below the race day information where you can add aid stations.  That table will
             tell you the segment length, duration, expected arrival, and nutrition for the segment.  There are also options for cutoff times,
-            crew access, pacer access, drop bags, if it is water only, and room for general comments.  I plan to add an export to Excel option
-            to the table but you are able to copy and paste it into a spreadsheet in the mean time.
+            crew access, pacer access, drop bags, if it is water only, and room for general comments.  Once all the aid stations are added, you can
+            save the table as an .xlsx file to open in Excel to save and edit.  Please share if you find it helpful!
           </p>
         </div>
           
