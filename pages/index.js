@@ -1,10 +1,15 @@
 import Head from 'next/head'
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
 
 import RaceInfoForm from '../components/RaceInfoForm';
 import AidStationForm from '../components/AidStationForm';
 import RaceInfo from '../components/RaceInfo';
-import AidStationTable from '../components/AidStationTable';
+
+const DynamicAidStationTable = dynamic(
+  () => import('../components/AidStationTable'),
+  { ssr: false }
+);
 
 export default function Home() {
   const [totalDistance, setTotalDistance] = useState("");
@@ -88,7 +93,7 @@ export default function Home() {
           distance={plan.distance}
         />
 
-        <AidStationTable
+        <DynamicAidStationTable
           aidStations={aidStations}
           plan={plan}
           calorieRate={calorieRate}

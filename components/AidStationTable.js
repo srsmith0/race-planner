@@ -9,8 +9,7 @@ export default function AidStationTable({
   return aidOne.distance - aidTwo.distance;
   };
 
-  function exportTable(e) {
-    e.preventDefault();
+  function exportTable() {
     const Table2Excel = window.Table2Excel;
     const table2excel = new Table2Excel()
     return table2excel.export(document.querySelectorAll('table'), 'aid-table')
@@ -50,7 +49,7 @@ export default function AidStationTable({
         />)}
       </tbody>
     </table>
-      <button onClick={(e) => exportTable(e)}>Export Table to Excel (.xlsx)</button>
+      <button onClick={() => exportTable()}>Export Table to Excel (.xlsx)</button>
     </>
   );
 };
