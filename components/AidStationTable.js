@@ -1,4 +1,5 @@
 import AidStationRow from './AidStationRow'
+import 'table2excel'
 
 export default function AidStationTable({
   aidStations, plan, calorieRate, hydrationRate, sodiumRate
@@ -8,7 +9,15 @@ export default function AidStationTable({
   return aidOne.distance - aidTwo.distance;
   };
 
+  function exportTable(e) {
+    e.preventDefault();
+    const Table2Excel = window.Table2Excel;
+    const table2excel = new Table2Excel()
+    return table2excel.export(document.querySelectorAll('table'), 'aid-table')
+  }
+
   return (
+    <>
     <table id="aid-table" className="default-text">
       <thead>
         <tr>
@@ -41,5 +50,7 @@ export default function AidStationTable({
         />)}
       </tbody>
     </table>
+      <button onClick={(e) => exportTable(e)}>Export Table to Excel (.xlsx)</button>
+    </>
   );
 };
