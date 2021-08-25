@@ -1,5 +1,6 @@
-## Ultra Planner
+# Ultra Planner
 
-A tool to plan pacing, nutrition, and electrolyte management for your next race.
+## A tool to plan pacing, nutrition, and electrolyte management for an ultramarathon.
 
-Under construction.
+> Visit https://ultra-planner.vercel.app/ to use the application.
+
