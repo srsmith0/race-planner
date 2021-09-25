@@ -45,8 +45,8 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
       return `${hours}:${time.split(':')[1]}` + amPm;
     }
   };
+
   function determineHourIncrease(arrivalHour, arrivalMinutes) {
-    let aidArrivalTime;
     if (arrivalMinutes > 59) {
       let convertedMinutesToHours = Math.floor(arrivalMinutes / 60);
       arrivalMinutes = Math.round(((arrivalMinutes / 60).toFixed(2).split('.')[1] / 100) * 60);
