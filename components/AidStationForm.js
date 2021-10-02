@@ -29,7 +29,6 @@ export default function AidStationForm({ aidStations, setAidStations, distance }
       let amPm = hour === 24 || hour < 12 ? ' AM' : ' PM';
       let tweleveHour = (hour % 12) || 12;
       convertedTime = `${tweleveHour}:${minutes} ${amPm}`;
-      console.log(convertedTime)
     };
     return convertedTime;
   };
