@@ -3,13 +3,13 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
     //sets start arrival time to start time or defaults to nothing if value is empty
     let startTime = document.getElementById('startTime').value;
     startTime = startTime[0] === "0" ? startTime.slice(1) : startTime;
-    return aid.arrivalTime = determineStartTime(startTime);
+    aid.arrivalTime = startTime;
+    return determineStartTime(startTime);
   } else {
     //adds segment time to last arrival time
     let arrivalHour = parseInt(lastArrival.split(':')[0]) + parseInt(segmentTime.split(':')[0]);
     let arrivalMinutes = Math.round(parseInt(lastArrival.split(':')[1]) + parseInt(segmentTime.split(':')[1]));
-    //set aid.arrivalTime to 24 hour time
-    //set 24 hr time to 12 hr time to display in table
+    //the aid object has 24 hour time but this function returns 12 hour time. other functions handle converting it from the object
     let aidArrivalTime = determineHourIncrease(arrivalHour, arrivalMinutes);
     aidArrivalTime = convert24PlusHours(aidArrivalTime);
     arrivalHour = arrivalHour > 24 ? arrivalHour - 24 : arrivalHour;
@@ -30,7 +30,6 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
     } else {
       arrival;
     };
-
     aid.arrivalTime = aidArrivalTime;
     return arrival;
   };
@@ -50,7 +49,8 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
     if (arrivalMinutes > 59) {
       let convertedMinutesToHours = Math.floor(arrivalMinutes / 60);
       arrivalMinutes = Math.round(((arrivalMinutes / 60).toFixed(2).split('.')[1] / 100) * 60);
-      arrivalMinutes = arrivalMinutes.toString().length === 1 && arrivalMinutes < 9 ? '0' + arrivalMinutes : arrivalMinutes;
+      //changed arrivalMinutes < 10 from arrivalMinutes < 9
+      arrivalMinutes = arrivalMinutes.toString().length === 1 && arrivalMinutes < 10 ? '0' + arrivalMinutes : arrivalMinutes;
       return `${arrivalHour + convertedMinutesToHours}:${arrivalMinutes}`;
     } else {
       return `${arrivalHour}:${arrivalMinutes}`;
