@@ -42,7 +42,7 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
       let amPm = hours >= 12 ? ' PM' : ' AM';
       hours = (hours % 12) || 12;
       return `${hours}:${time.split(':')[1]}` + amPm;
-    }
+    };
   };
 
   function determineHourIncrease(arrivalHour, arrivalMinutes) {
@@ -65,7 +65,7 @@ export default function calcArrival({ aid, segmentTime, lastArrival }) {
       convertedTime = `${hours - 24}:${minutes}`;
     } else {
       convertedTime = time;
-    }
+    };
     return convertedTime;
   };
 };

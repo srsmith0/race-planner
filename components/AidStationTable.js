@@ -6,7 +6,7 @@ export default function AidStationTable({
 }) {
   //sorts aid station by distance in case user forgets to add earlier aid station
   function ascendingDistance(aidOne, aidTwo) {
-  return aidOne.distance - aidTwo.distance;
+    return aidOne.distance - aidTwo.distance;
   };
 
   function exportTable(e) {
@@ -14,7 +14,7 @@ export default function AidStationTable({
     const Table2Excel = window.Table2Excel;
     const table2excel = new Table2Excel()
     return table2excel.export(document.querySelectorAll('table'), 'aid-table')
-  }
+  };
 
   return (
     <>

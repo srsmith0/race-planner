@@ -20,8 +20,7 @@ export default function createAidTableRow({
       const time = getPaceToMinutes(pace);
       getNutritionFactor(time)
       return aid.segmentTime = time;
-    };
-
+      };
   };
 
   function getPaceToMinutes(pace) {
@@ -38,7 +37,7 @@ export default function createAidTableRow({
       totalMinutes++;
     } else {
       totalMinutes = totalMinutes + Math.round(convertedSeconds);
-    };
+      };
 
     function formatTotalMinutes(minutes) {
       if (minutes < 10) {
@@ -61,8 +60,7 @@ export default function createAidTableRow({
       convertedMinutes = convertedMinutes + '0';
     } else {
       convertedMinutes
-    };
-    
+      };
     return totalMinutes / 60 <= 1 ? `00:${formatTotalMinutes(totalMinutes)}` : `${convertedHours}:${convertedMinutes}`
   };
 
@@ -74,7 +72,7 @@ export default function createAidTableRow({
       let minutes = time.toString().split(':')[1];
       let convertedMinutes = (minutes / 60).toFixed(2);
       return parseInt(number) + parseFloat(convertedMinutes);
-    };
+      };
   };
     
   getSegmentTime();

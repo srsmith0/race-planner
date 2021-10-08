@@ -25,7 +25,7 @@ export default function RaceInfoForm({
     setPlan(racePlan);
   };
 
-    function convertPace(pace) {
+  function convertPace(pace) {
     const firstDigitPace = pace.toString().split('.')[0];
     const secondDigitPace = "." + pace.toString().split('.')[1];
     let modifiedSecondDigitPace = (parseInt(Math.ceil(secondDigitPace * 60)).toString());
@@ -33,7 +33,7 @@ export default function RaceInfoForm({
       modifiedSecondDigitPace = "00";
     } else if (modifiedSecondDigitPace.length === 1) {
       modifiedSecondDigitPace = "0" + (parseInt(Math.floor(secondDigitPace * 60)).toString());
-    }
+      };
     return firstDigitPace + ':' + modifiedSecondDigitPace;
   };
 
