@@ -16,7 +16,7 @@ export default function AidStationForm({ aidStations, setAidStations, distance }
       const updatedAidStations = [...aidStations, newAidStation];
       setAidStations(updatedAidStations);
       };
-      document.getElementById("aid-form").reset();
+    document.getElementById("aid-form").reset();
   };
 
   function convert24Hours(time) {
@@ -29,7 +29,7 @@ export default function AidStationForm({ aidStations, setAidStations, distance }
       let amPm = hour === 24 || hour < 12 ? ' AM' : ' PM';
       let tweleveHour = (hour % 12) || 12;
       convertedTime = `${tweleveHour}:${minutes} ${amPm}`;
-    };
+      };
     return convertedTime;
   };
 
