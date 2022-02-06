@@ -47,7 +47,7 @@ export default function AidStationForm({ aidStations, setAidStations, distance }
         <input
           required
           id="aid-distance"
-          type="number"
+          type="float"
           min="0"
           step="0.01"
           name="aid-distance"

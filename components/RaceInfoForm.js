@@ -44,7 +44,7 @@ export default function RaceInfoForm({
           <label htmlFor="distance">Race distance: </label>
           <input
             required
-            type="number"
+            type="float"
             min="0"
             id="distance"
             name="distance"
